@@ -1,2 +1,1 @@
-#dit wordt het bestaand waarin het processing gedeelte gemaakt wordt. 
-#test
+#Dit wordt het bestand waarin het processing gedeelte gemaakt wordt.
