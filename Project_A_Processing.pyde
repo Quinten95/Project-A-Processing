@@ -1,9 +1,12 @@
 number_of_players = 3
 name_input_screen_display = False
 how_many_players_screen = True
+screenWidth = 1500
+screenHeight = 900
 
-def setup():    
-    size(1000, 800)
+def setup():
+    global screenWidth, screenHeight 
+    size(screenWidth, screenHeight)
     
     
 def draw():
@@ -28,34 +31,34 @@ def how_many_players():
     textFont(font1)
     textAlign(CENTER)
     fill(0,0,0)
-    text(question, 500, 100)
+    text(question, screenWidth/2, 100)
     
     initiate_buttons()
     
     
 #creates the buttons for the how_many_players screen
 def initiate_buttons():
-    global number_of_players
+    global number_of_players, screenWidth, screenHeight
     
     fill(255,255,255)
-    rect(470, 550, 60, 40)    
+    rect(720, 550, 60, 40)    
     fill(0,0,0)
-    text(str(number_of_players), 500, 582)
+    text(str(number_of_players), 750, 582)
     
     fill(200, 0, 0)
-    rect(400, 600, 60, 40)    
+    rect(650, 600, 60, 40)    
     fill(0,0,0)
-    text("-", 430, 630)
+    text("-", 680, 630)
     
     fill(0, 200, 0)
-    rect(540, 600, 60, 40)    
+    rect(790, 600, 60, 40)    
     fill(0,0,0)
-    text("+", 570, 632)
+    text("+", 820, 632)
     
     fill(255,255,255)
-    rect(470, 600, 60, 40)    
+    rect(720, 600, 60, 40)    
     fill(0,0,0)
-    text("OK", 500, 632)
+    text("OK", 750, 632)
 
 #Creates textboxes for the players from the amount of players variable, to input their names and store them in a player variable
 def name_input_screen():
@@ -64,19 +67,19 @@ def name_input_screen():
     textFont(font1)
     textAlign(CENTER)
     fill(0,0,0)
-    text("Number of players: " + str(number_of_players), 500, 300)
+    text("Number of players: " + str(number_of_players), screenWidth/2, 100)
     
 
 #Handles all the clicking of buttons in the program
 def mousePressed():
     global number_of_players, how_many_players_screen, name_input_screen_display
     if how_many_players_screen == True:
-        if (mouseX >= 400 and mouseX <= 460) and (mouseY >= 600 and mouseY <= 640):
+        if (mouseX >= 650 and mouseX <= 710) and (mouseY >= 600 and mouseY <= 640):
             if number_of_players > 3:
                 number_of_players -= 1
-        elif (mouseX >= 540 and mouseX <= 600) and (mouseY >= 600 and mouseY <= 640):
+        elif (mouseX >= 790 and mouseX <= 850) and (mouseY >= 600 and mouseY <= 640):
             if number_of_players < 6:
                 number_of_players += 1
-        elif (mouseX >= 470 and mouseX <= 530) and (mouseY >= 600 and mouseY <= 640):
+        elif (mouseX >= 720 and mouseX <= 780) and (mouseY >= 600 and mouseY <= 640):
             name_input_screen_display = True
             how_many_players_screen = False
