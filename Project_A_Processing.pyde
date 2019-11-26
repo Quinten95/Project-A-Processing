@@ -69,6 +69,20 @@ def name_input_screen():
     fill(0,0,0)
     text("Number of players: " + str(number_of_players), screenWidth/2, 100)
     
+    x = number_of_players
+    YPositionRect = 200
+    YPositionText = 232
+    y = player_number = 1
+    
+    while x > 0:        
+        fill(255,255,255)
+        rect(720, YPositionRect, 150, 40)    
+        fill(0,0,0)
+        text("Player"+ str(y)+" : ", 620, YPositionText)
+        x -= 1
+        YPositionRect += 100
+        YPositionText += 100
+        y += 1
 
 #Handles all the clicking of buttons in the program
 def mousePressed():
