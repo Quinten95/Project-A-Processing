@@ -1,6 +1,9 @@
 number_of_players = 3
-name_input_screen_display = False
+
 how_many_players_screen = True
+name_input_screen_display = False
+main_screen_display = False
+
 screenWidth = 1500
 screenHeight = 900
 
@@ -26,15 +29,15 @@ def setup():
 def draw():
     global how_many_players_screen, name_input_screen_display
     
-    background(230, 230, 230)
+    background(229, 180, 73)
     
     #Checks which screen should be active atm
     if how_many_players_screen == True:
         how_many_players()
     elif name_input_screen_display == True:
         name_input_screen()
-    else:
-        background(230, 230, 230)
+    elif main_screen_display == True:
+        main_screen()
         
 
 #Asks the user how many players are playing the game at the moment and stores that in a variable.
@@ -95,12 +98,34 @@ def name_input_screen():
         fill(255,255,255)
         rect(690, YPositionRect, 250, 40)    
         fill(0,0,0)
-        text("Player"+ str(y)+" : ", 610, YPositionText)
+        text("Player "+ str(y)+": ", 610, YPositionText)
         x -= 1
         YPositionRect += 100
         YPositionText += 100
         y += 1
         
+    if player1_box_selected == True:
+        fill(230, 230, 230)
+        rect(690, 200, 250, 40)
+    elif player2_box_selected == True:
+        fill(230, 230, 230)
+        rect(690, 300, 250, 40)
+    elif player3_box_selected == True:
+        fill(230, 230, 230)
+        rect(690, 400, 250, 40)
+    elif player4_box_selected == True:
+        fill(230, 230, 230)
+        rect(690, 500, 250, 40)
+    elif player5_box_selected == True:
+        fill(230, 230, 230)
+        rect(690, 600, 250, 40)
+    elif player6_box_selected == True:
+        fill(230, 230, 230)
+        rect(690, 700, 250, 40)
+    
+    font1 = createFont("Arial", 30)
+    textFont(font1)
+    fill(0, 0, 0)    
     textAlign(LEFT)
     text(player1_name, 700, 232)    
     text(player2_name, 700, 332)    
@@ -115,9 +140,37 @@ def name_input_screen():
     fill(0,0,0)
     text("OK", 750, 832)
     
+
+def main_screen():    
+    font1 = createFont("Arial", 30)
+    textFont(font1)
+    fill(0, 0, 0)    
+    textAlign(CENTER)
+    
+    x = 0
+    YPositionText = 80
+    y = player_number = 1
+    
+    player_names = [player1_name, player2_name, player3_name, player4_name, player5_name, player6_name]
+    
+    while x < 3:
+        text("Player "+ str(y)+": " + player_names[x], 200, YPositionText)
+        x += 1
+        y += 1
+        YPositionText += 250
+    
+    YPositionText = 80
+    while x < 6:
+        text("Player "+ str(y)+": " + player_names[x], 1000, YPositionText)
+        x += 1
+        y += 1
+        YPositionText += 250
+        
+    
+    
 #Handles all the clicking of buttons in the program
 def mousePressed():
-    global number_of_players, how_many_players_screen, name_input_screen_display
+    global number_of_players, how_many_players_screen, name_input_screen_display, main_screen_display
     global player1_box_selected, player2_box_selected, player3_box_selected
     global player4_box_selected, player5_box_selected, player6_box_selected
     if how_many_players_screen == True:
@@ -178,14 +231,15 @@ def mousePressed():
             
         #Detects wheter the OK button has been pressed
         elif (mouseX >= 720 and mouseX <= 780) and (mouseY >= 800 and mouseY <= 840):
-            name_input_screen_display = False 
-                       
+            name_input_screen_display = False
+            main_screen_display = True                        
             player1_box_selected = False
             player2_box_selected = False
             player3_box_selected = False
             player4_box_selected = False
             player5_box_selected = False
             player6_box_selected = False
+            
         else:
             player1_box_selected = False
             player2_box_selected = False
@@ -226,7 +280,8 @@ def keyPressed():
         or key == 'w' or key == 'W'
         or key == 'x' or key == 'X' 
         or key == 'y' or key == 'Y' 
-        or key == 'z' or key == 'Z' or key =='\b'):
+        or key == 'z' or key == 'Z' 
+        or key =='\b' or keyCode == 32):
         
         if (player1_box_selected == True) and (key != '\b'):
             player1_name += key
@@ -257,3 +312,4 @@ def keyPressed():
             player6_name += key
         elif (player6_box_selected == True) and (key == '\b'):
             player6_name = player6_name[:-1]
+    
