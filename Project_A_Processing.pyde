@@ -356,14 +356,10 @@ def keyPressed():
                 player6_name += key
         elif (player6_box_selected == True) and (key == '\b'):
             player6_name = player6_name[:-1]
-
-def setup():
-    size(1500, 900)
-    background("#F9A602")
-    arial = createFont("Arial", 20)
-
-      
-def draw():
+   
+    
+     
+def generateFieldCard():
     fill(255, 255, 255)
     drawADuelCard = rect(1100, 500, 50, 50)
     drawAFieldCard = rect(1200, 500, 50, 50)
@@ -374,8 +370,6 @@ def draw():
     text("?", 1225, 535)
     
     
-     
-def generateFieldCard():
     fieldCard1 = "Het is monsoon seizoen en door het regen zijn alle wegen versperd door drijfzand. Alle spelers gebruiken één minder dobbelsteen om te bewegen. "
     fieldCard2 = "Door gebruik te maken van een magische spreuk vallen alle tegenstanders in slaap. Een bijwerking van de spreuk zorgt ervoor dat na de tegenstanders wakker worden, de gebruiker ook in slaap valt. De tegenstanders slaan een beurt over, volgende beurt slaat de gebruiker een beurt over."
     fieldCard3 = "Je bent met je goede been uit bed gestapt. Je hebt het gevoel dat je meer kunt bewegen dan normaal. Voor deze beurt gebruik je een extra dobbelsteen om te bewegen. "
@@ -444,11 +438,5 @@ def generateDuelCard():
         
     print(selectedDuelCard)
     return selectedDuelCard
-    
-def mousePressed():
-    global mouseX, mouseY
-    if (mouseY > 499 and mouseY < 551) and (mouseX > 1199 and mouseX < 1251):
-      generateFieldCard()
-    if (mouseY > 499 and mouseY < 551) and (mouseX > 1099 and mouseX < 1151):
-      generateDuelCard()
+
     
