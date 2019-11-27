@@ -141,30 +141,31 @@ def name_input_screen():
     text("OK", 750, 832)
     
 
-def main_screen():    
+def main_screen():
     font1 = createFont("Arial", 30)
     textFont(font1)
     fill(0, 0, 0)    
-    textAlign(CENTER)
+    textAlign(LEFT)
     
     x = 0
-    YPositionText = 80
+    YPositionText = 150
     y = player_number = 1
     
     player_names = [player1_name, player2_name, player3_name, player4_name, player5_name, player6_name]
     
     while x < 3:
-        text("Player "+ str(y)+": " + player_names[x], 200, YPositionText)
+        text("Player "+ str(y)+": " + player_names[x], 100, YPositionText)
         x += 1
         y += 1
-        YPositionText += 250
+        YPositionText += 233
     
-    YPositionText = 80
-    while x < 6:
-        text("Player "+ str(y)+": " + player_names[x], 950, YPositionText)
+    YPositionText = 150
+    while x < number_of_players:
+        text("Player "+ str(y)+": " + player_names[x], 750, YPositionText)
         x += 1
         y += 1
-        YPositionText += 250
+        YPositionText += 233
+
         
     
     
