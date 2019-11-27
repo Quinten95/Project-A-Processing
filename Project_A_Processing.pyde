@@ -140,31 +140,68 @@ def name_input_screen():
     fill(0,0,0)
     text("OK", 750, 832)
     
-
+#Creates the main playing screen in which players can choose to draw a random card
+#the cards per player are shown
+#and players can use a card in their posession
 def main_screen():
-    font1 = createFont("Arial", 30)
-    textFont(font1)
-    fill(0, 0, 0)    
-    textAlign(LEFT)
+    font1 = createFont("Arial", 30)    
+    font2 = createFont("Arial", 75)
     
     x = 0
     YPositionText = 150
+    YPositionRect = 180
     y = player_number = 1
     
     player_names = [player1_name, player2_name, player3_name, player4_name, player5_name, player6_name]
     
     while x < 3:
+        fill(0, 0, 0)
+        textAlign(LEFT)
+        textFont(font1) 
         text("Player "+ str(y)+": " + player_names[x], 100, YPositionText)
+        
+        textFont(font2)
+        textAlign(CENTER)    
+        fill(230,230,230)
+        rect(100, YPositionRect, 80, 80)
+        fill(0,0,0)
+        text("?", 140, YPositionRect+65)
+        
+        fill(230,230,230)
+        rect(190, YPositionRect, 80, 80)
+        fill(0,0,0)
+        text("!", 230, YPositionRect+65)
+        
         x += 1
         y += 1
         YPositionText += 233
+        YPositionRect += 233
     
     YPositionText = 150
+    YPositionRect = 180
+    
     while x < number_of_players:
+        fill(0,0,0)        
+        textAlign(LEFT)
+        textFont(font1)
         text("Player "+ str(y)+": " + player_names[x], 750, YPositionText)
+        
+        textFont(font2)
+        textAlign(CENTER)        
+        fill(230,230,230)
+        rect(750, YPositionRect, 80, 80)
+        fill(0,0,0)
+        text("?", 790, YPositionRect+65)
+        
+        fill(230,230,230)
+        rect(840, YPositionRect, 80, 80)
+        fill(0,0,0)
+        text("!", 880, YPositionRect+65)
+        
         x += 1
         y += 1
         YPositionText += 233
+        YPositionRect += 233
 
         
     
@@ -285,32 +322,38 @@ def keyPressed():
         or key =='\b' or keyCode == 32):
         
         if (player1_box_selected == True) and (key != '\b'):
-            player1_name += key
+            if len(player1_name) < 10:
+                player1_name += key
         elif (player1_box_selected == True) and (key == '\b'):
             player1_name = player1_name[:-1]
         
         elif (player2_box_selected == True) and (key != '\b'):
-            player2_name += key
+            if len(player2_name) < 10:
+                player2_name += key
         elif (player2_box_selected == True) and (key == '\b'):
             player2_name = player2_name[:-1]
         
         elif (player3_box_selected == True) and (key != '\b'):
-            player3_name += key
+            if len(player3_name) < 10:
+                player3_name += key
         elif (player3_box_selected == True) and (key == '\b'):
             player3_name = player3_name[:-1]
         
         elif (player4_box_selected == True) and (key != '\b'):
-            player4_name += key
+            if len(player4_name) < 10:
+                player4_name += key
         elif (player4_box_selected == True) and (key == '\b'):
             player4_name = player4_name[:-1]
         
         elif (player5_box_selected == True) and (key != '\b'):
-            player5_name += key
+            if len(player5_name) < 10:
+                player5_name += key
         elif (player5_box_selected == True) and (key == '\b'):
             player5_name = player5_name[:-1]
         
         elif (player6_box_selected == True) and (key != '\b'):
-            player6_name += key
+            if len(player6_name) < 10:
+                player6_name += key
         elif (player6_box_selected == True) and (key == '\b'):
             player6_name = player6_name[:-1]
     
