@@ -161,7 +161,7 @@ def main_screen():
     
     YPositionText = 80
     while x < 6:
-        text("Player "+ str(y)+": " + player_names[x], 1000, YPositionText)
+        text("Player "+ str(y)+": " + player_names[x], 950, YPositionText)
         x += 1
         y += 1
         YPositionText += 250
