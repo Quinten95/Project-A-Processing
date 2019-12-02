@@ -3,6 +3,7 @@ number_of_players = 3
 how_many_players_screen = True
 name_input_screen_display = False
 main_screen_display = False
+show_cards_display = False
 
 screenWidth = 1500
 screenHeight = 900
@@ -38,6 +39,9 @@ player6_trapcards = []
 fieldcard_list = []
 trapcard_list = []
 
+player_card_list_g = []
+player_name_g = ''
+
 
 
 
@@ -48,7 +52,8 @@ def setup():
     
     
 def draw():
-    global how_many_players_screen, name_input_screen_display
+    global how_many_players_screen, name_input_screen_display, main_screen_display, show_cards_display
+    global player_name_g, player_card_list_g
     
     background(229, 180, 73)
     
@@ -59,6 +64,8 @@ def draw():
         name_input_screen()
     elif main_screen_display == True:
         main_screen()
+    elif show_cards_display == True:
+        show_cards()
         
 
 #Asks the user how many players are playing the game at the moment and stores that in a variable.
@@ -167,6 +174,7 @@ def name_input_screen():
 def main_screen():
     font1 = createFont("Arial", 30)    
     font2 = createFont("Arial", 75)
+    font3 = createFont("Arial", 20)
     
     x = 0
     YPositionText = 150
@@ -192,6 +200,12 @@ def main_screen():
         rect(190, YPositionRect, 80, 80)
         fill(0,0,0)
         text("!", 230, YPositionRect+65)
+        
+        fill(230,230,230)
+        rect(290, YPositionRect, 80, 80)
+        fill(0,0,0)
+        textFont(font3)
+        text("Kaarten", 331, YPositionRect+44)
         
         x += 1
         y += 1
@@ -219,13 +233,60 @@ def main_screen():
         fill(0,0,0)
         text("!", 880, YPositionRect+65)
         
+        fill(230,230,230)
+        rect(930, YPositionRect, 80, 80)
+        fill(0,0,0)
+        textFont(font3)
+        text("Kaarten", 971, YPositionRect+44)
+        
         x += 1
         y += 1
         YPositionText += 233
         YPositionRect += 233
 
-        
+def show_cards():
+    global player_card_list_g, player_name_g
+    font1 = createFont("Arial", 30)
+    font2 = createFont("Arial", 20)
+    textAlign(CENTER)
+    fill(0,0,0)
+    textFont(font1)
+    text("Kaarten van " + player_name_g + ":", screenWidth/2, 100) 
     
+    textX = 100
+    textY = 200
+    buttonX = 1100
+    buttonY = 220
+    x = 1
+    
+    fill(230,230,230)
+    rect(1300, 90, 140, 40)
+    fill(0,0,0)
+    text("Terug", 1370, 122)
+    
+    for i in player_card_list_g:
+        textAlign(LEFT)
+        fill(0,0,0)
+        textFont(font1)
+        text("Kaart " + str(x) + ":", textX, textY)
+        
+        textFont(font2)
+        text(i, textX, textY + 30)
+        
+        fill(230,230,230)
+        rect(buttonX, buttonY, 160, 40)   
+        fill(0,0,0)
+        textAlign(CENTER)     
+        textFont(font1)
+        text("Gebruik!", buttonX + 80, buttonY + 31)
+    
+        
+        
+        
+        buttonY += 180
+        textY += 180
+        x += 1
+        
     
 #Handles all the clicking of buttons in the program
 def mousePressed():
@@ -235,7 +296,8 @@ def mousePressed():
     global player1_fieldcards, player2_fieldcards, player3_fieldcards, player4_fieldcards, player5_fieldcards, player6_fieldcards
     global fieldcard_list, fieldCard1, fieldCard2, fieldCard3, fieldCard4, fieldCard5, fieldCard6
     global duelCard7, duelCard8, duelCard9, duelCard10, duelCard11, duelCard12
-    global trapCard_list, trapCard1, trapCard2, trapCard3, trapCard4, trapCard5, trapCard6 
+    global trapCard_list, trapCard1, trapCard2, trapCard3, trapCard4, trapCard5
+    global player_card_list_g, player_name_g, show_cards_display
     
     if how_many_players_screen == True:
         if (mouseX >= 650 and mouseX <= 710) and (mouseY >= 600 and mouseY <= 640):
@@ -360,6 +422,67 @@ def mousePressed():
         elif ((mouseX >= 840 and mouseX <= 920) and (mouseY >= 646 and mouseY <= 726)) and number_of_players > 5:
             if len(trapcard_list) > 0:
                 player6_trapcards.append(generate_trap_card())
+                
+        elif (mouseX >= 280 and mouseX <= 370) and (mouseY >= 180 and mouseY <= 260):  
+            player_card_list_g = player1_fieldcards + player1_trapcards 
+            player_name_g = player1_name
+                  
+            show_cards_display = True
+            main_screen_display = False
+              
+        elif (mouseX >= 280 and mouseX <= 370) and (mouseY >= 413 and mouseY <= 493):  
+            player_card_list_g = player2_fieldcards + player2_trapcards 
+            player_name_g = player2_name
+                  
+            show_cards_display = True
+            main_screen_display = False
+              
+        elif (mouseX >= 280 and mouseX <= 370) and (mouseY >= 646 and mouseY <= 726):  
+            player_card_list_g = player3_fieldcards + player3_trapcards 
+            player_name_g = player3_name
+                  
+            show_cards_display = True
+            main_screen_display = False
+              
+        elif ((mouseX >= 940 and mouseX <= 1020) and (mouseY >= 180 and mouseY <= 260)) and number_of_players > 3:
+            player_card_list_g = player4_fieldcards + player4_trapcards 
+            player_name_g = player4_name
+                  
+            show_cards_display = True
+            main_screen_display = False
+        
+        elif ((mouseX >= 940 and mouseX <= 1020) and (mouseY >= 413 and mouseY <= 493)) and number_of_players > 4:
+            player_card_list_g = player5_fieldcards + player5_trapcards 
+            player_name_g = player5_name
+            
+            show_cards_display = True
+            main_screen_display = False
+        
+        elif ((mouseX >= 940 and mouseX <= 1020) and (mouseY >= 646 and mouseY <= 726)) and number_of_players > 5:
+            player_card_list_g = player6_fieldcards + player6_trapcards 
+            player_name_g = player6_name
+            
+            show_cards_display = True
+            main_screen_display = False
+    
+    elif show_cards_display == True:
+        if (mouseX >= 1300 and mouseX <= 1440) and (mouseY >= 90 and mouseY <= 130):
+            main_screen_display = True
+            show_cards_display = False
+            
+        elif(mouseX >= 1100 and mouseX <= 1260) and (mouseY >= 220 and mouseY <= 260) and len(player_card_list_g) > 0:
+            fieldcard_list.append(player_card_list_g.pop(0))
+            
+        elif(mouseX >= 1100 and mouseX <= 1260) and (mouseY >= 400 and mouseY <= 440) and len(player_card_list_g) > 1:
+            fieldcard_list.append(player_card_list_g.pop(1))
+            
+        elif(mouseX >= 1100 and mouseX <= 1260) and (mouseY >= 580 and mouseY <= 620) and len(player_card_list_g) > 2:
+            fieldcard_list.append(player_card_list_g.pop(2))
+            
+        elif(mouseX >= 1100 and mouseX <= 1260) and (mouseY >= 760 and mouseY <= 800) and len(player_card_list_g) > 3:
+            fieldcard_list.append(player_card_list_g.pop(3))
+            
+              
 
 def keyPressed():
     global player1_name, player2_name, player3_name, player4_name, player5_name, player6_name
@@ -435,31 +558,30 @@ def keyPressed():
 def init_field_cards():
     global fieldcard_list, fieldCard1, fieldCard2, fieldCard3, fieldCard4, fieldCard5, fieldCard6
     global duelCard7, duelCard8, duelCard9, duelCard10, duelCard11, duelCard12
-    global trapcard_list, trapCard1, trapCard2, trapCard3, trapCard4, trapCard5, trapCard6
+    global trapcard_list, trapCard1, trapCard2, trapCard3, trapCard4, trapCard5
     
-    fieldCard1 = "Het is monsoon seizoen en door het regen zijn alle wegen versperd door drijfzand. Alle spelers gebruiken één minder dobbelsteen om te bewegen. "
-    fieldCard2 = "Door gebruik te maken van een magische spreuk vallen alle tegenstanders in slaap. Een bijwerking van de spreuk zorgt ervoor dat na de tegenstanders wakker worden, de gebruiker ook in slaap valt. De tegenstanders slaan een beurt over, volgende beurt slaat de gebruiker een beurt over."
-    fieldCard3 = "Je bent met je goede been uit bed gestapt. Je hebt het gevoel dat je meer kunt bewegen dan normaal. Voor deze beurt gebruik je een extra dobbelsteen om te bewegen. "
-    fieldCard4 = "Door een magische spreuk ruil je plaatsen met één van je tegenstanders. Je tegenstander landt precies waar jij was, maar jij valt van 10 meter boven de grond. Je landt op een pijnlijke manier en moet uitrusten om verder te gaan. Ruil plaats met gekozen tegenstander en sla een beurt over. "
-    fieldCard5 = "Door een vloek hebben alle spelers een rot humeur. Niemand heeft zin om verder te gaan. Ze doen het minimale van wat hun verwacht wordt. Alle spelers gebruiken één dobbelsteen minder om te bewegen."
-    fieldCard6 = "Door een magische spreuk kun je door een spiegel de kaarten van je tegenstander bekijken. Het nadeel is dat je tegenstander ook jouw kaarten kan zien, omdat de spiegel van beide kanten werkt. Gebruiker en tegenstander tonen hun kaarten aan elkaar."
-    duelCard7 = "Je vindt voor het gevecht een magische lamp. De genie in de lamp geeft je een wens. Je wenst voor kracht om je tegenstander te verslaan. De genie geeft je geen kracht, maar maakt wel je tegenstander zwakker. De aanvaller mag maar één dobbelsteen gebruiken."
-    duelCard8 = "Voor het gevecht vind je een kist vol met wapens en een uitrusting. Hierdoor zul je niet makkelijk verliezen. De verdediger mag twee dobbelstenen gebruiken."
-    duelCard9 = "Je vindt voor het gevecht een magische lamp. De genie in de lamp geeft je een wens. Je wenst voor kracht om je tegenstander te verslaan. De genie geeft je wel kracht, maar zorgt er ook voor dat je tegenstander sterker wordt. De aanvaller en de verdediger gebruiken één extra dobbelsteen."
-    duelCard10 = "Tijdens het gevecht gooi je zand in het gezicht van je tegenstander. Je tegenstander kan je moeilijk zien, waardoor zijn kans van winnen minder wordt. Verminder het uiteindelijke getal van je tegenstander met 1."
-    duelCard11 = "Tijdens het gevecht maakt je tegenstander een misstap en zit tijdelijk vast in drijfzand. Je tegenstander kan zich moeilijk bewegen, waardoor je kans van winnen groter wordt. Verhoog het uiteindelijke getal van de gebruiker met 1."
-    duelCard12 = "Je vindt dat het gevecht niet was gegaan zoals je wilde. Je vraagt je tegenstander voor nog een gevecht. Je blijft zeuren totdat je tegenstander met tegenzin accepteert, met als conditie dat 2 voorwerpen naar de winnaar gaan. Forceer een rematch voor 2 voorwerpen als prijs."
+    fieldCard1 = "Het is monsoon seizoen en door het regen zijn alle wegen versperd door drijfzand.\nAlle spelers gebruiken een dobbelsteen minder om te bewegen."
+    fieldCard2 = "Door gebruik te maken van een magische spreuk vallen alle tegenstanders in slaap.\nEen bijwerking van de spreuk zorgt ervoor dat wanneer de tegenstanders wakker worden, \nde gebruiker ook in slaap valt. \nDe tegenstanders slaan een beurt over, volgende beurt slaat de gebruiker een beurt over."
+    fieldCard3 = "Je bent met je goede been uit bed gestapt. \nJe hebt het gevoel dat je meer kunt bewegen dan normaal. \nVoor deze beurt gebruik je een extra dobbelsteen om te bewegen. "
+    fieldCard4 = "Door een magische spreuk ruil je plaatsen met een van je tegenstanders. \nJe tegenstander landt precies waar jij was, maar jij valt van 10 meter boven de grond. \nJe landt op een pijnlijke manier en moet uitrusten om verder te gaan. \nRuil plaats met gekozen tegenstander en sla een beurt over. "
+    fieldCard5 = "Door een vloek hebben alle spelers een rot humeur. \nNiemand heeft zin om verder te gaan. \nZe doen het minimale van wat hun verwacht wordt. \nAlle spelers gebruiken een dobbelsteen minder om te bewegen."
+    fieldCard6 = "Door een magische spreuk kun je door een spiegel de kaarten van je tegenstander bekijken. \nHet nadeel is dat je tegenstander ook jouw kaarten kan zien, omdat de spiegel van beide kanten werkt. \nGebruiker en tegenstander tonen hun kaarten aan elkaar."
+    duelCard7 = "Je vindt voor het gevecht een magische lamp. De genie in de lamp geeft je een wens. \nJe wenst voor kracht om je tegenstander te verslaan. \nDe genie geeft je geen kracht, maar maakt wel je tegenstander zwakker. \nDe aanvaller mag maar een dobbelsteen gebruiken."
+    duelCard8 = "Voor het gevecht vind je een kist vol met wapens en een uitrusting. \nHierdoor zul je niet makkelijk verliezen. \nDe verdediger mag twee dobbelstenen gebruiken."
+    duelCard9 = "Je vindt voor het gevecht een magische lamp. De genie in de lamp geeft je een wens. \nJe wenst voor kracht om je tegenstander te verslaan. \nDe genie geeft je wel kracht, maar zorgt er ook voor dat je tegenstander sterker wordt. \nDe aanvaller en de verdediger gebruiken een extra dobbelsteen."
+    duelCard10 = "Tijdens het gevecht gooi je zand in het gezicht van je tegenstander. \nJe tegenstander kan je moeilijk zien, waardoor zijn kans van winnen minder wordt. \nVerminder het uiteindelijke getal van je tegenstander met 1."
+    duelCard11 = "Tijdens het gevecht maakt je tegenstander een misstap en zit tijdelijk vast in drijfzand. \nJe tegenstander kan zich moeilijk bewegen, waardoor je kans van winnen groter wordt. \nVerhoog het uiteindelijke getal van de gebruiker met 1."
+    duelCard12 = "Je vindt dat het gevecht niet was gegaan zoals je wilde. \nJe vraagt je tegenstander voor nog een gevecht. \nJe blijft zeuren totdat je tegenstander met tegenzin accepteert, \nmet als conditie dat 2 voorwerpen worden terug gelegd. \nForceer een rematch met 2 voorwerpen als prijs."
     
     fieldcard_list = [fieldCard1, fieldCard2, fieldCard3, fieldCard4, fieldCard5, fieldCard6, duelCard7, duelCard8, duelCard9, duelCard10, duelCard11, duelCard12]
     
-    trapCard1 = "Je valt in een trap en zit vast in een grot. Het duurt een aantal uren tot je uit de grot kunt klimmen. Sla een beurt over."
+    trapCard1 = "Je valt in een trap en zit vast in een grot. Het duurt een aantal uren tot je uit de grot kunt klimmen. \nSla een beurt over."
     trapCard2 = "Je gaat door je enkel en moet uitrusten tot je weer verder kan. Sla een beurt over."
-    trapCard3 = "Je valt in een trap en zit vast in een grot. Je probeert uit de grot te klimmen, maar iets of iemand heeft de grot glad gemaakt, waardoor je geen houvast kan hebben. Na een halve dag valt een stevig stuk touw naar beneden. Je beklimt het touw en ontsnapt de grot. Een hele dag is voorbijgegaan. Sla twee beurten over."
-    trapCard4 = "Door gebruik te maken van een magisch portaal probeer je een voorwerp te stelen van een tegenstander. Het lukt, maar tijdens de transactie valt één van jouw items in het portaal. Gebruiker ruilt een random voorwerp met een tegenstander."
-    trapCard5 = "Door de sterke wind van een zandstorm kun je nauwelijks iets zien. Na een tijdje is de zandstorm voorbij. Je komt erachter dat één van je voorwerpen door de zandstorm weggewaaid is. Verlies een random voorwerp."
-    trapCard6 = "Door een magische spreuk ruilen alle spelers plaatsen met elkaar. Je tegenstanders landen veilig op hun plaats, maar jij valt van 20 meter boven de grond. Je landt op je hoofd en bent buiten bewustzijn. Je wordt pas na een hele dag wakker. Alle spelers ruilen plaatsen met elkaar en sla twee beurten over."
+    trapCard3 = "Je valt in een trap en zit vast in een grot. Je probeert uit de grot te klimmen, maar iets of iemand heeft de grot glad gemaakt, waardoor je geen houvast kan hebben. \nNa een halve dag valt een stevig stuk touw naar beneden. Je beklimt het touw en ontsnapt de grot. \nEen hele dag is voorbijgegaan. Sla twee beurten over."
+    trapCard4 = "Door de sterke wind van een zandstorm kun je nauwelijks iets zien. Na een tijdje is de zandstorm voorbij. \nJe komt erachter dat een van je voorwerpen door de zandstorm weggewaaid is. Verlies een random voorwerp."
+    trapCard5 = "Door een magische spreuk ruilen alle spelers plaatsen met elkaar. Je tegenstanders landen veilig op hun plaats, maar jij valt van 20 meter boven de grond. \nJe landt op je hoofd en bent buiten bewustzijn. Je wordt pas na een hele dag wakker. Alle spelers ruilen plaatsen met elkaar en sla twee beurten over."
     
-    trapcard_list = [trapCard1, trapCard2, trapCard3, trapCard4, trapCard5, trapCard6]
+    trapcard_list = [trapCard1, trapCard2, trapCard3, trapCard4, trapCard5]
 
 #when this function is called it returns a card from the list of field cards and then removes it, so it can't be picked by another player
 def generate_field_card():    
