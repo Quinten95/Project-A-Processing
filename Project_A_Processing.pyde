@@ -577,9 +577,9 @@ def init_field_cards():
     
     trapCard1 = "Je valt in een trap en zit vast in een grot. Het duurt een aantal uren tot je uit de grot kunt klimmen. \nSla een beurt over."
     trapCard2 = "Je gaat door je enkel en moet uitrusten tot je weer verder kan. Sla een beurt over."
-    trapCard3 = "Je valt in een trap en zit vast in een grot. Je probeert uit de grot te klimmen, maar iets of iemand heeft de grot glad gemaakt, waardoor je geen houvast kan hebben. \nNa een halve dag valt een stevig stuk touw naar beneden. Je beklimt het touw en ontsnapt de grot. \nEen hele dag is voorbijgegaan. Sla twee beurten over."
+    trapCard3 = "Je valt in een trap en zit vast in een grot. Je probeert uit de grot te klimmen, \nmaar iets of iemand heeft de grot glad gemaakt, waardoor je geen houvast kan hebben. \nNa een halve dag valt een stevig stuk touw naar beneden. Je beklimt het touw en ontsnapt de grot. \nEen hele dag is voorbijgegaan. Sla twee beurten over."
     trapCard4 = "Door de sterke wind van een zandstorm kun je nauwelijks iets zien. Na een tijdje is de zandstorm voorbij. \nJe komt erachter dat een van je voorwerpen door de zandstorm weggewaaid is. Verlies een random voorwerp."
-    trapCard5 = "Door een magische spreuk ruilen alle spelers plaatsen met elkaar. Je tegenstanders landen veilig op hun plaats, maar jij valt van 20 meter boven de grond. \nJe landt op je hoofd en bent buiten bewustzijn. Je wordt pas na een hele dag wakker. Alle spelers ruilen plaatsen met elkaar en sla twee beurten over."
+    trapCard5 = "Door een magische spreuk ruilen alle spelers plaatsen met elkaar. \nJe tegenstanders landen veilig op hun plaats, maar jij valt van 20 meter boven de grond. \nJe landt op je hoofd en bent buiten bewustzijn. Je wordt pas na een hele dag wakker. \nAlle spelers ruilen plaatsen met elkaar en sla twee beurten over."
     
     trapcard_list = [trapCard1, trapCard2, trapCard3, trapCard4, trapCard5]
 
