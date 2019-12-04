@@ -46,9 +46,10 @@ player_name_g = ''
 
 
 def setup():
-    global screenWidth, screenHeight 
+    global screenWidth, screenHeight, frame_count_main
     size(screenWidth, screenHeight)
     init_field_cards()
+    frame_count_main = 0
     
     
 def draw():
@@ -172,9 +173,11 @@ def name_input_screen():
 #the cards per player are shown
 #and players can use a card in their posession
 def main_screen():
+    global player_starting, frame_count_main
     font1 = createFont("Arial", 30)    
     font2 = createFont("Arial", 75)
     font3 = createFont("Arial", 20)
+    font4 = createFont("Arial", 35)
     
     x = 0
     YPositionText = 150
@@ -182,6 +185,15 @@ def main_screen():
     y = player_number = 1
     
     player_names = [player1_name, player2_name, player3_name, player4_name, player5_name, player6_name]
+    
+    
+    
+    if frame_count_main < 900:
+        fill(0, 0, 0)
+        textAlign(CENTER)
+        textFont(font4) 
+        text(player_names[player_starting] + " begint!", screenWidth/2, 100)
+    
     
     while x < 3:
         fill(0, 0, 0)
@@ -210,7 +222,8 @@ def main_screen():
         x += 1
         y += 1
         YPositionText += 233
-        YPositionRect += 233
+        YPositionRect += 233        
+        frame_count_main += 1
     
     YPositionText = 150
     YPositionRect = 180
@@ -243,6 +256,7 @@ def main_screen():
         y += 1
         YPositionText += 233
         YPositionRect += 233
+
 
 def show_cards():
     global player_card_list_g, player_name_g
@@ -297,7 +311,7 @@ def mousePressed():
     global fieldcard_list, fieldCard1, fieldCard2, fieldCard3, fieldCard4, fieldCard5, fieldCard6
     global duelCard7, duelCard8, duelCard9, duelCard10, duelCard11, duelCard12
     global trapCard_list, trapCard1, trapCard2, trapCard3, trapCard4, trapCard5
-    global player_card_list_g, player_name_g, show_cards_display
+    global player_card_list_g, player_name_g, show_cards_display, player_starting
     
     if how_many_players_screen == True:
         if (mouseX >= 650 and mouseX <= 710) and (mouseY >= 600 and mouseY <= 640):
@@ -365,6 +379,7 @@ def mousePressed():
             player4_box_selected = False
             player5_box_selected = False
             player6_box_selected = False
+            player_starting = int(random(0,number_of_players-1))
             
         else:
             player1_box_selected = False
