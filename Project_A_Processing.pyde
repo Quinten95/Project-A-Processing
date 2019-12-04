@@ -96,7 +96,7 @@ def how_many_players():
     global question, number_of_players, how_many_players_screen
     question = "Met hoeveel spelers speelt u?"
     
-    font1 = createFont("Arial", 30)
+    font1 = createFont("Courier", 30)
     textFont(font1)
     textAlign(CENTER)
     fill(0,0,0)
@@ -110,22 +110,22 @@ def initiate_buttons():
     global number_of_players, screenWidth, screenHeight
     
     fill(255,255,255)
-    rect(720, 550, 60, 40)    
+    rect(720, 550, 60, 40, 6)    
     fill(0,0,0)
     text(str(number_of_players), 750, 582)
     
     fill(200, 0, 0)
-    rect(650, 600, 60, 40)    
+    rect(650, 600, 60, 40, 6)    
     fill(0,0,0)
     text("-", 680, 630)
     
     fill(0, 200, 0)
-    rect(790, 600, 60, 40)    
+    rect(790, 600, 60, 40, 6)    
     fill(0,0,0)
     text("+", 820, 632)
     
     fill(255,255,255)
-    rect(720, 600, 60, 40)    
+    rect(720, 600, 60, 40, 6)    
     fill(0,0,0)
     text("OK", 750, 632)
 
@@ -134,7 +134,7 @@ def name_input_screen():
     global number_of_players, name_input_screen_display
     global player1_name, player2_name, player3_name, player4_name, player5_name, player6_name
     
-    font1 = createFont("Arial", 30)
+    font1 = createFont("Courier", 30)
     textFont(font1)
     textAlign(CENTER)
     fill(0,0,0)
@@ -147,7 +147,7 @@ def name_input_screen():
     
     while x > 0:        
         fill(255,255,255)
-        rect(690, YPositionRect, 250, 40)    
+        rect(690, YPositionRect, 250, 40, 6)    
         fill(0,0,0)
         text("Player "+ str(y)+": ", 610, YPositionText)
         x -= 1
@@ -157,24 +157,24 @@ def name_input_screen():
         
     if player1_box_selected == True:
         fill(230, 230, 230)
-        rect(690, 200, 250, 40)
+        rect(690, 200, 250, 40, 6)
     elif player2_box_selected == True:
         fill(230, 230, 230)
-        rect(690, 300, 250, 40)
+        rect(690, 300, 250, 40, 6)
     elif player3_box_selected == True:
         fill(230, 230, 230)
-        rect(690, 400, 250, 40)
+        rect(690, 400, 250, 40, 6)
     elif player4_box_selected == True:
         fill(230, 230, 230)
-        rect(690, 500, 250, 40)
+        rect(690, 500, 250, 40, 6)
     elif player5_box_selected == True:
         fill(230, 230, 230)
-        rect(690, 600, 250, 40)
+        rect(690, 600, 250, 40, 6)
     elif player6_box_selected == True:
         fill(230, 230, 230)
-        rect(690, 700, 250, 40)
+        rect(690, 700, 250, 40, 6)
     
-    font1 = createFont("Arial", 30)
+    font1 = createFont("Courier", 30)
     textFont(font1)
     fill(0, 0, 0)    
     textAlign(LEFT)
@@ -187,7 +187,7 @@ def name_input_screen():
     
     textAlign(CENTER)
     fill(255,255,255)
-    rect(720, 800, 60, 40)    
+    rect(720, 800, 60, 40, 6)    
     fill(0,0,0)
     text("OK", 750, 832)
     
@@ -196,10 +196,10 @@ def name_input_screen():
 #and players can use a card in their posession
 def main_screen():
     global player_starting, frame_count_main
-    font1 = createFont("Arial", 30)    
-    font2 = createFont("Arial", 75)
-    font3 = createFont("Arial", 20)
-    font4 = createFont("Arial", 35)
+    font1 = createFont("Courier", 30)    
+    font2 = createFont("Courier", 75)
+    font3 = createFont("Courier", 17)
+    font4 = createFont("Courier", 35)
     
     x = 0
     YPositionText = 150
@@ -226,17 +226,17 @@ def main_screen():
         textFont(font2)
         textAlign(CENTER)    
         fill(230,230,230)
-        rect(100, YPositionRect, 80, 80)
+        rect(100, YPositionRect, 80, 80, 6)
         fill(0,0,0)
         text("?", 140, YPositionRect+65)
         
         fill(230,230,230)
-        rect(190, YPositionRect, 80, 80)
+        rect(190, YPositionRect, 80, 80, 6)
         fill(0,0,0)
         text("!", 230, YPositionRect+65)
         
         fill(230,230,230)
-        rect(290, YPositionRect, 80, 80)
+        rect(290, YPositionRect, 80, 80, 6)
         fill(0,0,0)
         textFont(font3)
         text("Kaarten", 331, YPositionRect+44)
@@ -259,17 +259,17 @@ def main_screen():
         textFont(font2)
         textAlign(CENTER)        
         fill(230,230,230)
-        rect(750, YPositionRect, 80, 80)
+        rect(750, YPositionRect, 80, 80, 6)
         fill(0,0,0)
         text("?", 790, YPositionRect+65)
         
         fill(230,230,230)
-        rect(840, YPositionRect, 80, 80)
+        rect(840, YPositionRect, 80, 80, 6)
         fill(0,0,0)
         text("!", 880, YPositionRect+65)
         
         fill(230,230,230)
-        rect(930, YPositionRect, 80, 80)
+        rect(930, YPositionRect, 80, 80, 6)
         fill(0,0,0)
         textFont(font3)
         text("Kaarten", 971, YPositionRect+44)
@@ -282,7 +282,7 @@ def main_screen():
 
 def show_cards():
     global player_card_list_g, player_name_g
-    font1 = createFont("Arial", 30)
+    font1 = createFont("Courier", 30)
     font2 = createFont("Arial", 20)
     textAlign(CENTER)
     fill(0,0,0)
@@ -296,7 +296,7 @@ def show_cards():
     x = 1
     
     fill(230,230,230)
-    rect(1300, 90, 140, 40)
+    rect(1300, 90, 140, 40, 6)
     fill(0,0,0)
     text("Terug", 1370, 122)
     
@@ -310,7 +310,7 @@ def show_cards():
         text(i, textX, textY + 30)
         
         fill(230,230,230)
-        rect(buttonX, buttonY, 160, 40)   
+        rect(buttonX, buttonY, 160, 40, 6)   
         fill(0,0,0)
         textAlign(CENTER)     
         textFont(font1)
@@ -856,7 +856,7 @@ def start_screen():
         textSize(50)
         
         fill(35)
-        rect(32, 700, 55, 125, 7)
+        rect(32, 700, 55, 125, 7, 6)
         noStroke()
         
         fill(255)
