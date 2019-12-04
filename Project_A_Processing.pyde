@@ -76,7 +76,7 @@ def draw():
     global how_many_players_screen, name_input_screen_display, main_screen_display, show_cards_display
     global player_name_g, player_card_list_g
     
-    background(86, 43, 203)
+    background(148, 120, 214)
     
     #Checks which screen should be active atm
     if show_start_screen == True:
