@@ -1,6 +1,7 @@
 number_of_players = 3
 
-how_many_players_screen = True
+show_start_screen = True
+how_many_players_screen = False
 name_input_screen_display = False
 main_screen_display = False
 show_cards_display = False
@@ -42,24 +43,45 @@ trapcard_list = []
 player_card_list_g = []
 player_name_g = ''
 
-
+add_library("sound")
+frames = []
 
 
 def setup():
-    global screenWidth, screenHeight, frame_count_main
+    global screenWidth, screenHeight, frame_count_main    
+    global bgs, isMouseWithinSpace, gifWidth, gifHeight, value
+    
     size(screenWidth, screenHeight)
     init_field_cards()
     frame_count_main = 0
+    
+    gifWidth = 400
+    gifHeight = 200
+    value = 255
+    
+    for i in range(0, 74):
+        frames.append(loadImage("frame_" + (str(i) if i >= 10 else "0" + str(i)) + "_delay-0.03s.jpg"))
+            
+    backgroundMusic()
+
+    size(1500,900)
+    frameRate(60)
+    
+    global images
+    images = list()
+    images.append(loadImage("pyramid.png"))
     
     
 def draw():
     global how_many_players_screen, name_input_screen_display, main_screen_display, show_cards_display
     global player_name_g, player_card_list_g
     
-    background(229, 180, 73)
+    background(86, 43, 203)
     
     #Checks which screen should be active atm
-    if how_many_players_screen == True:
+    if show_start_screen == True:
+        start_screen()
+    elif how_many_players_screen == True:
         how_many_players()
     elif name_input_screen_display == True:
         name_input_screen()
@@ -304,7 +326,7 @@ def show_cards():
     
 #Handles all the clicking of buttons in the program
 def mousePressed():
-    global number_of_players, how_many_players_screen, name_input_screen_display, main_screen_display
+    global show_start_screen, number_of_players, how_many_players_screen, name_input_screen_display, main_screen_display
     global player1_box_selected, player2_box_selected, player3_box_selected
     global player4_box_selected, player5_box_selected, player6_box_selected
     global player1_fieldcards, player2_fieldcards, player3_fieldcards, player4_fieldcards, player5_fieldcards, player6_fieldcards
@@ -312,8 +334,28 @@ def mousePressed():
     global duelCard7, duelCard8, duelCard9, duelCard10, duelCard11, duelCard12
     global trapCard_list, trapCard1, trapCard2, trapCard3, trapCard4, trapCard5
     global player_card_list_g, player_name_g, show_cards_display, player_starting
+    global isMouseWithinSpace, value, bgs
     
-    if how_many_players_screen == True:
+    if show_start_screen == True:
+        if isMouseWithinSpace(1390, 850, 70, 18):
+            exit()                                   #Exit Button
+        
+        if isMouseWithinSpace(625, 770, 275, 20):
+            how_many_players_screen = True
+            show_start_screen = False                                    #Start Game Button
+        if isMouseWithinSpace(50, 850, 25, 20):
+            if value == 0:
+                value = 255
+            else:
+                value = 0
+        
+        if value == 0:
+            if isMouseWithinSpace(60, 720, 10, 10):
+                pass
+            if isMouseWithinSpace(60, 690, 10, 10):
+                pass
+    
+    elif how_many_players_screen == True:
         if (mouseX >= 650 and mouseX <= 710) and (mouseY >= 600 and mouseY <= 640):
             if number_of_players > 3:
                 number_of_players -= 1
@@ -761,3 +803,74 @@ def generate_trap_card():
         pass
 
     
+def backgroundMusic():
+    bgs = SoundFile(this, "Ancient Egyptian Music - Prince of Egypt.mp3")
+    bgs.play()
+    bgs.loop()
+
+def start_screen():
+    global bgs, isMouseWithinSpace, gifWidth, gifHeight, images
+    
+    
+    # img = loadImage("pyramid.png")
+    images[0].resize(width, height)
+    background(images[0])
+    
+    # gif = loadImage("fallingstar.gif")
+    # gif.resize(gifWidth, gifHeight)
+    # image(gif, 0, 0)
+    
+    # gif2 = loadImage("fallingstar.gif")
+    # gif2.resize(gifWidth, gifHeight)
+    # image(gif2, 1100, 0)
+    
+    
+    image(frames[frameCount%74], 0, 0, 200, 200) #8 veranderen in aantal afbeeldingen 73 or 74.
+    image(frames[frameCount%74], 1000, 10, 150, 100)
+    image(frames[frameCount%74], 500, 0, 500, 100)
+    image(frames[frameCount%74], 1300, 40, 500, 100)
+
+    font = createFont("blackcherry.TTF", 100)
+    textFont(font)
+    textAlign(CENTER, CENTER)
+    fill(255)
+    text("Dunes & Deserts", width / 2, height / 2)
+
+    textSize(50)
+    text("{                    }", width / 2, 770)
+    text("Start Game", width / 2, 775)
+    
+    textSize(38)
+    text("Exit", 1425, 850)
+    textFont(font)
+    
+    textSize(70)
+    fill(value)
+    text(">", 60, 840)
+    
+    
+    if value == 0:
+        textSize(70)
+        fill(255)
+        text("^", 60, 840)
+        textSize(50)
+        
+        fill(35)
+        rect(32, 700, 55, 125, 7)
+        noStroke()
+        
+        fill(255)
+        text("+", 60, 720)
+        text("-", 60, 790)
+        
+
+    
+    def isMouseWithinSpace(x, y, breedte, hoogte):
+        if x < mouseX < x + breedte and y < mouseY < y + hoogte:
+            return True
+        else:
+            return False
+    
+    
+    #fill(255)
+    #text(str(millis()) + "  " + str(millis()//62%8), 100, 100)
