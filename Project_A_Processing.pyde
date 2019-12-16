@@ -528,154 +528,154 @@ def mousePressed():
             show_cards_display = False
             
         elif(mouseX >= 1100 and mouseX <= 1260) and (mouseY >= 220 and mouseY <= 260) and len(player_card_list_g) > 0:
-            if player_card_list_g[0] in player1_fieldcards:                
+            if player_card_list_g[0] in player1_fieldcards and player_name_g == player1_name:                
                 player1_fieldcards.remove(player_card_list_g[0])
                 fieldcard_list.append(player_card_list_g.pop(0))
-            elif player_card_list_g[0] in player1_trapcards:                
+            elif player_card_list_g[0] in player1_trapcards and player_name_g == player1_name:                
                 player1_trapcards.remove(player_card_list_g[0])
                 trapcard_list.append(player_card_list_g.pop(0))            
-            elif player_card_list_g[0] in player2_fieldcards:                
+            elif player_card_list_g[0] in player2_fieldcards and player_name_g == player2_name:                
                 player2_fieldcards.remove(player_card_list_g[0])
                 fieldcard_list.append(player_card_list_g.pop(0))
-            elif player_card_list_g[0] in player2_trapcards:                
+            elif player_card_list_g[0] in player2_trapcards and player_name_g == player2_name:                
                 player2_trapcards.remove(player_card_list_g[0])
                 trapcard_list.append(player_card_list_g.pop(0))            
-            elif player_card_list_g[0] in player3_fieldcards:                
+            elif player_card_list_g[0] in player3_fieldcards and player_name_g == player3_name:                
                 player3_fieldcards.remove(player_card_list_g[0])
                 fieldcard_list.append(player_card_list_g.pop(0))
-            elif player_card_list_g[0] in player3_trapcards:                
+            elif player_card_list_g[0] in player3_trapcards and player_name_g == player3_name:                
                 player3_trapcards.remove(player_card_list_g[0])
                 trapcard_list.append(player_card_list_g.pop(0))            
-            elif player_card_list_g[0] in player4_fieldcards:                
+            elif player_card_list_g[0] in player4_fieldcards and player_name_g == player4_name:                
                 player4_fieldcards.remove(player_card_list_g[0])
                 fieldcard_list.append(player_card_list_g.pop(0))
-            elif player_card_list_g[0] in player4_trapcards:                
+            elif player_card_list_g[0] in player4_trapcards and player_name_g == player4_name:                
                 player4_trapcards.remove(player_card_list_g[0])
                 trapcard_list.append(player_card_list_g.pop(0))            
-            elif player_card_list_g[0] in player5_fieldcards:                
+            elif player_card_list_g[0] in player5_fieldcards and player_name_g == player5_name:                
                 player5_fieldcards.remove(player_card_list_g[0])
                 fieldcard_list.append(player_card_list_g.pop(0))
-            elif player_card_list_g[0] in player5_trapcards:                
+            elif player_card_list_g[0] in player5_trapcards and player_name_g == player5_name:                
                 player5_trapcards.remove(player_card_list_g[0])
                 trapcard_list.append(player_card_list_g.pop(0))            
-            elif player_card_list_g[0] in player6_fieldcards:                
+            elif player_card_list_g[0] in player6_fieldcards and player_name_g == player6_name:                
                 player6_fieldcards.remove(player_card_list_g[0])
                 fieldcard_list.append(player_card_list_g.pop(0))
-            elif player_card_list_g[0] in player6_trapcards:                
+            elif player_card_list_g[0] in player6_trapcards and player_name_g == player6_name:                
                 player6_trapcards.remove(player_card_list_g[0])
                 trapcard_list.append(player_card_list_g.pop(0))
             
         elif(mouseX >= 1100 and mouseX <= 1260) and (mouseY >= 400 and mouseY <= 440) and len(player_card_list_g) > 1:
-            if player_card_list_g[1] in player1_fieldcards:                
+            if player_card_list_g[1] in player1_fieldcards and player_name_g == player1_name:                
                 player1_fieldcards.remove(player_card_list_g[1])
                 fieldcard_list.append(player_card_list_g.pop(1))
-            elif player_card_list_g[1] in player1_trapcards:                
+            elif player_card_list_g[1] in player1_trapcards and player_name_g == player1_name:                
                 player1_trapcards.remove(player_card_list_g[1])
                 trapcard_list.append(player_card_list_g.pop(1))            
-            elif player_card_list_g[1] in player2_fieldcards:                
+            elif player_card_list_g[1] in player2_fieldcards and player_name_g == player2_name:                
                 player2_fieldcards.remove(player_card_list_g[1])
                 fieldcard_list.append(player_card_list_g.pop(1))
-            elif player_card_list_g[1] in player2_trapcards:                
+            elif player_card_list_g[1] in player2_trapcards and player_name_g == player2_name:                
                 player2_trapcards.remove(player_card_list_g[1])
                 trapcard_list.append(player_card_list_g.pop(1))            
-            elif player_card_list_g[1] in player3_fieldcards:                
+            elif player_card_list_g[1] in player3_fieldcards and player_name_g == player3_name:                
                 player3_fieldcards.remove(player_card_list_g[1])
                 fieldcard_list.append(player_card_list_g.pop(1))
-            elif player_card_list_g[1] in player3_trapcards:                
+            elif player_card_list_g[1] in player3_trapcards and player_name_g == player3_name:                
                 player3_trapcards.remove(player_card_list_g[1])
                 trapcard_list.append(player_card_list_g.pop(1))            
-            elif player_card_list_g[1] in player4_fieldcards:                
+            elif player_card_list_g[1] in player4_fieldcards and player_name_g == player4_name:                
                 player4_fieldcards.remove(player_card_list_g[1])
                 fieldcard_list.append(player_card_list_g.pop(1))
-            elif player_card_list_g[1] in player4_trapcards:                
+            elif player_card_list_g[1] in player4_trapcards and player_name_g == player4_name:                
                 player4_trapcards.remove(player_card_list_g[1])
                 trapcard_list.append(player_card_list_g.pop(1))            
-            elif player_card_list_g[1] in player5_fieldcards:                
+            elif player_card_list_g[1] in player5_fieldcards and player_name_g == player5_name:                
                 player5_fieldcards.remove(player_card_list_g[1])
                 fieldcard_list.append(player_card_list_g.pop(1))
-            elif player_card_list_g[1] in player5_trapcards:                
+            elif player_card_list_g[1] in player5_trapcards and player_name_g == player5_name:                
                 player5_trapcards.remove(player_card_list_g[1])
                 trapcard_list.append(player_card_list_g.pop(1))            
-            elif player_card_list_g[1] in player6_fieldcards:                
+            elif player_card_list_g[1] in player6_fieldcards and player_name_g == player6_name:                
                 player6_fieldcards.remove(player_card_list_g[1])
                 fieldcard_list.append(player_card_list_g.pop(1))
-            elif player_card_list_g[1] in player6_trapcards:                
+            elif player_card_list_g[1] in player6_trapcards and player_name_g == player6_name:                
                 player6_trapcards.remove(player_card_list_g[1])
                 trapcard_list.append(player_card_list_g.pop(1))
             
         elif(mouseX >= 1100 and mouseX <= 1260) and (mouseY >= 580 and mouseY <= 620) and len(player_card_list_g) > 2:
-            if player_card_list_g[2] in player1_fieldcards:                
+            if player_card_list_g[2] in player1_fieldcards and player_name_g == player1_name:                
                 player1_fieldcards.remove(player_card_list_g[2])
                 fieldcard_list.append(player_card_list_g.pop(0))
-            elif player_card_list_g[2] in player1_trapcards:                
+            elif player_card_list_g[2] in player1_trapcards and player_name_g == player1_name:                
                 player1_trapcards.remove(player_card_list_g[2])
                 trapcard_list.append(player_card_list_g.pop(0))            
-            elif player_card_list_g[2] in player2_fieldcards:                
+            elif player_card_list_g[2] in player2_fieldcards and player_name_g == player2_name:                
                 player2_fieldcards.remove(player_card_list_g[2])
                 fieldcard_list.append(player_card_list_g.pop(0))
-            elif player_card_list_g[2] in player2_trapcards:                
+            elif player_card_list_g[2] in player2_trapcards and player_name_g == player2_name:                
                 player2_trapcards.remove(player_card_list_g[2])
                 trapcard_list.append(player_card_list_g.pop(0))            
-            elif player_card_list_g[2] in player3_fieldcards:                
+            elif player_card_list_g[2] in player3_fieldcards and player_name_g == player3_name:                
                 player3_fieldcards.remove(player_card_list_g[2])
                 fieldcard_list.append(player_card_list_g.pop(0))
-            elif player_card_list_g[2] in player3_trapcards:                
+            elif player_card_list_g[2] in player3_trapcards and player_name_g == player3_name:                
                 player3_trapcards.remove(player_card_list_g[2])
                 trapcard_list.append(player_card_list_g.pop(0))            
-            elif player_card_list_g[2] in player4_fieldcards:                
+            elif player_card_list_g[2] in player4_fieldcards and player_name_g == player4_name:                
                 player4_fieldcards.remove(player_card_list_g[2])
                 fieldcard_list.append(player_card_list_g.pop(0))
-            elif player_card_list_g[2] in player4_trapcards:                
+            elif player_card_list_g[2] in player4_trapcards and player_name_g == player4_name:                
                 player4_trapcards.remove(player_card_list_g[2])
                 trapcard_list.append(player_card_list_g.pop(0))            
-            elif player_card_list_g[2] in player5_fieldcards:                
+            elif player_card_list_g[2] in player5_fieldcards and player_name_g == player5_name:                
                 player5_fieldcards.remove(player_card_list_g[2])
                 fieldcard_list.append(player_card_list_g.pop(0))
-            elif player_card_list_g[2] in player5_trapcards:                
+            elif player_card_list_g[2] in player5_trapcards and player_name_g == player5_name:                
                 player5_trapcards.remove(player_card_list_g[2])
                 trapcard_list.append(player_card_list_g.pop(0))            
-            elif player_card_list_g[2] in player6_fieldcards:                
+            elif player_card_list_g[2] in player6_fieldcards and player_name_g == player6_name:                
                 player6_fieldcards.remove(player_card_list_g[2])
                 fieldcard_list.append(player_card_list_g.pop(0))
-            elif player_card_list_g[2] in player6_trapcards:                
+            elif player_card_list_g[2] in player6_trapcards and player_name_g == player6_name:                
                 player6_trapcards.remove(player_card_list_g[2])
                 trapcard_list.append(player_card_list_g.pop(0))
             
         elif(mouseX >= 1100 and mouseX <= 1260) and (mouseY >= 760 and mouseY <= 800) and len(player_card_list_g) > 3:
-            if player_card_list_g[3] in player1_fieldcards:                
+            if player_card_list_g[3] in player1_fieldcards and player_name_g == player1_name:                
                 player1_fieldcards.remove(player_card_list_g[3])
                 fieldcard_list.append(player_card_list_g.pop(0))
-            elif player_card_list_g[3] in player1_trapcards:                
+            elif player_card_list_g[3] in player1_trapcards and player_name_g == player1_name:                
                 player1_trapcards.remove(player_card_list_g[3])
                 trapcard_list.append(player_card_list_g.pop(0))            
-            elif player_card_list_g[3] in player2_fieldcards:                
+            elif player_card_list_g[3] in player2_fieldcards and player_name_g == player2_name:                
                 player2_fieldcards.remove(player_card_list_g[3])
                 fieldcard_list.append(player_card_list_g.pop(0))
-            elif player_card_list_g[3] in player2_trapcards:                
+            elif player_card_list_g[3] in player2_trapcards and player_name_g == player2_name:                
                 player2_trapcards.remove(player_card_list_g[3])
                 trapcard_list.append(player_card_list_g.pop(0))            
-            elif player_card_list_g[3] in player3_fieldcards:                
+            elif player_card_list_g[3] in player3_fieldcards and player_name_g == player3_name:                
                 player3_fieldcards.remove(player_card_list_g[3])
                 fieldcard_list.append(player_card_list_g.pop(0))
-            elif player_card_list_g[3] in player3_trapcards:                
+            elif player_card_list_g[3] in player3_trapcards and player_name_g == player3_name:                
                 player3_trapcards.remove(player_card_list_g[3])
                 trapcard_list.append(player_card_list_g.pop(0))            
-            elif player_card_list_g[3] in player4_fieldcards:                
+            elif player_card_list_g[3] in player4_fieldcards and player_name_g == player4_name:                
                 player4_fieldcards.remove(player_card_list_g[3])
                 fieldcard_list.append(player_card_list_g.pop(0))
-            elif player_card_list_g[3] in player4_trapcards:                
+            elif player_card_list_g[3] in player4_trapcards and player_name_g == player4_name:                
                 player4_trapcards.remove(player_card_list_g[3])
                 trapcard_list.append(player_card_list_g.pop(0))            
-            elif player_card_list_g[3] in player5_fieldcards:                
+            elif player_card_list_g[3] in player5_fieldcards and player_name_g == player5_name:                
                 player5_fieldcards.remove(player_card_list_g[3])
                 fieldcard_list.append(player_card_list_g.pop(0))
-            elif player_card_list_g[3] in player5_trapcards:                
+            elif player_card_list_g[3] in player5_trapcards and player_name_g == player5_name:                
                 player5_trapcards.remove(player_card_list_g[3])
                 trapcard_list.append(player_card_list_g.pop(0))            
-            elif player_card_list_g[3] in player6_fieldcards:                
+            elif player_card_list_g[3] in player6_fieldcards and player_name_g == player6_name:                
                 player6_fieldcards.remove(player_card_list_g[3])
                 fieldcard_list.append(player_card_list_g.pop(0))
-            elif player_card_list_g[3] in player6_trapcards:                
+            elif player_card_list_g[3] in player6_trapcards and player_name_g == player6_name:                
                 player6_trapcards.remove(player_card_list_g[3])
                 trapcard_list.append(player_card_list_g.pop(0))
             
@@ -763,22 +763,64 @@ def init_field_cards():
     fieldCard4 = "Door een magische spreuk ruil je plaatsen met een van je tegenstanders. \nJe tegenstander landt precies waar jij was, maar jij valt van 10 meter boven de grond. \nJe landt op een pijnlijke manier en moet uitrusten om verder te gaan. \nRuil plaats met gekozen tegenstander en sla een beurt over. "
     fieldCard5 = "Door een vloek hebben alle spelers een rot humeur. \nNiemand heeft zin om verder te gaan. \nZe doen het minimale van wat hun verwacht wordt. \nAlle spelers gebruiken een dobbelsteen minder om te bewegen."
     fieldCard6 = "Door een magische spreuk kun je door een spiegel de kaarten van je tegenstander bekijken. \nHet nadeel is dat je tegenstander ook jouw kaarten kan zien, omdat de spiegel van beide kanten werkt. \nGebruiker en tegenstander tonen hun kaarten aan elkaar."
+    fieldCard7 = "Het is monsoon seizoen en door het regen zijn alle wegen versperd door drijfzand.\nAlle spelers gebruiken een dobbelsteen minder om te bewegen."
+    fieldCard8 = "Door gebruik te maken van een magische spreuk vallen alle tegenstanders in slaap.\nEen bijwerking van de spreuk zorgt ervoor dat wanneer de tegenstanders wakker worden, \nde gebruiker ook in slaap valt. \nDe tegenstanders slaan een beurt over, volgende beurt slaat de gebruiker een beurt over."
+    fieldCard9 = "Je bent met je goede been uit bed gestapt. \nJe hebt het gevoel dat je meer kunt bewegen dan normaal. \nVoor deze beurt gebruik je een extra dobbelsteen om te bewegen. "
+    fieldCard10 = "Door een magische spreuk ruil je plaatsen met een van je tegenstanders. \nJe tegenstander landt precies waar jij was, maar jij valt van 10 meter boven de grond. \nJe landt op een pijnlijke manier en moet uitrusten om verder te gaan. \nRuil plaats met gekozen tegenstander en sla een beurt over. "
+    fieldCard11 = "Door een vloek hebben alle spelers een rot humeur. \nNiemand heeft zin om verder te gaan. \nZe doen het minimale van wat hun verwacht wordt. \nAlle spelers gebruiken een dobbelsteen minder om te bewegen."
+    fieldCard12 = "Door een magische spreuk kun je door een spiegel de kaarten van je tegenstander bekijken. \nHet nadeel is dat je tegenstander ook jouw kaarten kan zien, omdat de spiegel van beide kanten werkt. \nGebruiker en tegenstander tonen hun kaarten aan elkaar."
+    fieldCard13 = "Het is monsoon seizoen en door het regen zijn alle wegen versperd door drijfzand.\nAlle spelers gebruiken een dobbelsteen minder om te bewegen."
+    fieldCard14 = "Door gebruik te maken van een magische spreuk vallen alle tegenstanders in slaap.\nEen bijwerking van de spreuk zorgt ervoor dat wanneer de tegenstanders wakker worden, \nde gebruiker ook in slaap valt. \nDe tegenstanders slaan een beurt over, volgende beurt slaat de gebruiker een beurt over."
+    fieldCard15 = "Je bent met je goede been uit bed gestapt. \nJe hebt het gevoel dat je meer kunt bewegen dan normaal. \nVoor deze beurt gebruik je een extra dobbelsteen om te bewegen. "
+    fieldCard16 = "Door een magische spreuk ruil je plaatsen met een van je tegenstanders. \nJe tegenstander landt precies waar jij was, maar jij valt van 10 meter boven de grond. \nJe landt op een pijnlijke manier en moet uitrusten om verder te gaan. \nRuil plaats met gekozen tegenstander en sla een beurt over. "
+    fieldCard17 = "Door een vloek hebben alle spelers een rot humeur. \nNiemand heeft zin om verder te gaan. \nZe doen het minimale van wat hun verwacht wordt. \nAlle spelers gebruiken een dobbelsteen minder om te bewegen."
+    fieldCard18 = "Door een magische spreuk kun je door een spiegel de kaarten van je tegenstander bekijken. \nHet nadeel is dat je tegenstander ook jouw kaarten kan zien, omdat de spiegel van beide kanten werkt. \nGebruiker en tegenstander tonen hun kaarten aan elkaar."
+    
+    duelCard1 = "Je vindt voor het gevecht een magische lamp. De genie in de lamp geeft je een wens. \nJe wenst voor kracht om je tegenstander te verslaan. \nDe genie geeft je geen kracht, maar maakt wel je tegenstander zwakker. \nDe aanvaller mag maar een dobbelsteen gebruiken."
+    duelCard2 = "Voor het gevecht vind je een kist vol met wapens en een uitrusting. \nHierdoor zul je niet makkelijk verliezen. \nDe verdediger mag twee dobbelstenen gebruiken."
+    duelCard3 = "Je vindt voor het gevecht een magische lamp. De genie in de lamp geeft je een wens. \nJe wenst voor kracht om je tegenstander te verslaan. \nDe genie geeft je wel kracht, maar zorgt er ook voor dat je tegenstander sterker wordt. \nDe aanvaller en de verdediger gebruiken een extra dobbelsteen."
+    duelCard4 = "Tijdens het gevecht gooi je zand in het gezicht van je tegenstander. \nJe tegenstander kan je moeilijk zien, waardoor zijn kans van winnen minder wordt. \nVerminder het uiteindelijke getal van je tegenstander met 1."
+    duelCard5 = "Tijdens het gevecht maakt je tegenstander een misstap en zit tijdelijk vast in drijfzand. \nJe tegenstander kan zich moeilijk bewegen, waardoor je kans van winnen groter wordt. \nVerhoog het uiteindelijke getal van de gebruiker met 1."
+    duelCard6 = "Je vindt dat het gevecht niet was gegaan zoals je wilde. \nJe vraagt je tegenstander voor nog een gevecht. \nJe blijft zeuren totdat je tegenstander met tegenzin accepteert, \nmet als conditie dat 2 voorwerpen worden terug gelegd. \nForceer een rematch met 2 voorwerpen als prijs."
     duelCard7 = "Je vindt voor het gevecht een magische lamp. De genie in de lamp geeft je een wens. \nJe wenst voor kracht om je tegenstander te verslaan. \nDe genie geeft je geen kracht, maar maakt wel je tegenstander zwakker. \nDe aanvaller mag maar een dobbelsteen gebruiken."
     duelCard8 = "Voor het gevecht vind je een kist vol met wapens en een uitrusting. \nHierdoor zul je niet makkelijk verliezen. \nDe verdediger mag twee dobbelstenen gebruiken."
     duelCard9 = "Je vindt voor het gevecht een magische lamp. De genie in de lamp geeft je een wens. \nJe wenst voor kracht om je tegenstander te verslaan. \nDe genie geeft je wel kracht, maar zorgt er ook voor dat je tegenstander sterker wordt. \nDe aanvaller en de verdediger gebruiken een extra dobbelsteen."
     duelCard10 = "Tijdens het gevecht gooi je zand in het gezicht van je tegenstander. \nJe tegenstander kan je moeilijk zien, waardoor zijn kans van winnen minder wordt. \nVerminder het uiteindelijke getal van je tegenstander met 1."
     duelCard11 = "Tijdens het gevecht maakt je tegenstander een misstap en zit tijdelijk vast in drijfzand. \nJe tegenstander kan zich moeilijk bewegen, waardoor je kans van winnen groter wordt. \nVerhoog het uiteindelijke getal van de gebruiker met 1."
     duelCard12 = "Je vindt dat het gevecht niet was gegaan zoals je wilde. \nJe vraagt je tegenstander voor nog een gevecht. \nJe blijft zeuren totdat je tegenstander met tegenzin accepteert, \nmet als conditie dat 2 voorwerpen worden terug gelegd. \nForceer een rematch met 2 voorwerpen als prijs."
+    duelCard13 = "Je vindt voor het gevecht een magische lamp. De genie in de lamp geeft je een wens. \nJe wenst voor kracht om je tegenstander te verslaan. \nDe genie geeft je geen kracht, maar maakt wel je tegenstander zwakker. \nDe aanvaller mag maar een dobbelsteen gebruiken."
+    duelCard14 = "Voor het gevecht vind je een kist vol met wapens en een uitrusting. \nHierdoor zul je niet makkelijk verliezen. \nDe verdediger mag twee dobbelstenen gebruiken."
+    duelCard15 = "Je vindt voor het gevecht een magische lamp. De genie in de lamp geeft je een wens. \nJe wenst voor kracht om je tegenstander te verslaan. \nDe genie geeft je wel kracht, maar zorgt er ook voor dat je tegenstander sterker wordt. \nDe aanvaller en de verdediger gebruiken een extra dobbelsteen."
+    duelCard16 = "Tijdens het gevecht gooi je zand in het gezicht van je tegenstander. \nJe tegenstander kan je moeilijk zien, waardoor zijn kans van winnen minder wordt. \nVerminder het uiteindelijke getal van je tegenstander met 1."
+    duelCard17 = "Tijdens het gevecht maakt je tegenstander een misstap en zit tijdelijk vast in drijfzand. \nJe tegenstander kan zich moeilijk bewegen, waardoor je kans van winnen groter wordt. \nVerhoog het uiteindelijke getal van de gebruiker met 1."
+    duelCard18 = "Je vindt dat het gevecht niet was gegaan zoals je wilde. \nJe vraagt je tegenstander voor nog een gevecht. \nJe blijft zeuren totdat je tegenstander met tegenzin accepteert, \nmet als conditie dat 2 voorwerpen worden terug gelegd. \nForceer een rematch met 2 voorwerpen als prijs."
     
-    fieldcard_list = [fieldCard1, fieldCard2, fieldCard3, fieldCard4, fieldCard5, fieldCard6, duelCard7, duelCard8, duelCard9, duelCard10, duelCard11, duelCard12]
+    fieldcard_list = [fieldCard1, fieldCard2, fieldCard3, fieldCard4, fieldCard5, fieldCard6,
+                      fieldCard7, fieldCard8, fieldCard9, fieldCard10, fieldCard11, fieldCard12,
+                      fieldCard13, fieldCard14, fieldCard15, fieldCard16, fieldCard17, fieldCard18,
+                      duelCard1, duelCard2, duelCard3, duelCard4, duelCard5, duelCard6, 
+                      duelCard7, duelCard8, duelCard9, duelCard10, duelCard11, duelCard12,
+                      duelCard13, duelCard14, duelCard15, duelCard16, duelCard17, duelCard18]
     
     trapCard1 = "Je valt in een trap en zit vast in een grot. Het duurt een aantal uren tot je uit de grot kunt klimmen. \nSla een beurt over."
     trapCard2 = "Je gaat door je enkel en moet uitrusten tot je weer verder kan. Sla een beurt over."
     trapCard3 = "Je valt in een trap en zit vast in een grot. Je probeert uit de grot te klimmen, \nmaar iets of iemand heeft de grot glad gemaakt, waardoor je geen houvast kan hebben. \nNa een halve dag valt een stevig stuk touw naar beneden. Je beklimt het touw en ontsnapt de grot. \nEen hele dag is voorbijgegaan. Sla twee beurten over."
     trapCard4 = "Door de sterke wind van een zandstorm kun je nauwelijks iets zien. Na een tijdje is de zandstorm voorbij. \nJe komt erachter dat een van je voorwerpen door de zandstorm weggewaaid is. Verlies een random voorwerp."
     trapCard5 = "Door een magische spreuk ruilen alle spelers plaatsen met elkaar. \nJe tegenstanders landen veilig op hun plaats, maar jij valt van 20 meter boven de grond. \nJe landt op je hoofd en bent buiten bewustzijn. Je wordt pas na een hele dag wakker. \nAlle spelers ruilen plaatsen met elkaar en sla twee beurten over."
+    trapCard6 = "Je valt in een trap en zit vast in een grot. Het duurt een aantal uren tot je uit de grot kunt klimmen. \nSla een beurt over."
+    trapCard7 = "Je gaat door je enkel en moet uitrusten tot je weer verder kan. Sla een beurt over."
+    trapCard8 = "Je valt in een trap en zit vast in een grot. Je probeert uit de grot te klimmen, \nmaar iets of iemand heeft de grot glad gemaakt, waardoor je geen houvast kan hebben. \nNa een halve dag valt een stevig stuk touw naar beneden. Je beklimt het touw en ontsnapt de grot. \nEen hele dag is voorbijgegaan. Sla twee beurten over."
+    trapCard9 = "Door de sterke wind van een zandstorm kun je nauwelijks iets zien. Na een tijdje is de zandstorm voorbij. \nJe komt erachter dat een van je voorwerpen door de zandstorm weggewaaid is. Verlies een random voorwerp."
+    trapCard10 = "Door een magische spreuk ruilen alle spelers plaatsen met elkaar. \nJe tegenstanders landen veilig op hun plaats, maar jij valt van 20 meter boven de grond. \nJe landt op je hoofd en bent buiten bewustzijn. Je wordt pas na een hele dag wakker. \nAlle spelers ruilen plaatsen met elkaar en sla twee beurten over."
+    trapCard11 = "Je valt in een trap en zit vast in een grot. Het duurt een aantal uren tot je uit de grot kunt klimmen. \nSla een beurt over."
+    trapCard12 = "Je gaat door je enkel en moet uitrusten tot je weer verder kan. Sla een beurt over."
+    trapCard13 = "Je valt in een trap en zit vast in een grot. Je probeert uit de grot te klimmen, \nmaar iets of iemand heeft de grot glad gemaakt, waardoor je geen houvast kan hebben. \nNa een halve dag valt een stevig stuk touw naar beneden. Je beklimt het touw en ontsnapt de grot. \nEen hele dag is voorbijgegaan. Sla twee beurten over."
+    trapCard14 = "Door de sterke wind van een zandstorm kun je nauwelijks iets zien. Na een tijdje is de zandstorm voorbij. \nJe komt erachter dat een van je voorwerpen door de zandstorm weggewaaid is. Verlies een random voorwerp."
+    trapCard15 = "Door een magische spreuk ruilen alle spelers plaatsen met elkaar. \nJe tegenstanders landen veilig op hun plaats, maar jij valt van 20 meter boven de grond. \nJe landt op je hoofd en bent buiten bewustzijn. Je wordt pas na een hele dag wakker. \nAlle spelers ruilen plaatsen met elkaar en sla twee beurten over."
     
-    trapcard_list = [trapCard1, trapCard2, trapCard3, trapCard4, trapCard5]
+    trapcard_list = [trapCard1, trapCard2, trapCard3, trapCard4, trapCard5,
+                     trapCard6, trapCard7, trapCard8, trapCard9, trapCard10,
+                     trapCard11, trapCard12, trapCard13, trapCard14, trapCard15]
 
 #when this function is called it returns a card from the list of field cards and then removes it, so it can't be picked by another player
 def generate_field_card():    
