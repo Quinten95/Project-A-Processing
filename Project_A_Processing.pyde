@@ -48,6 +48,13 @@ player_name_g = ''
 add_library("sound")
 frames = []
 
+player1millis = -3001
+player2millis = -3001
+player3millis = -3001
+player4millis = -3001
+player5millis = -3001
+player6millis = -3001
+
 
 def setup():
     global screenWidth, screenHeight   
@@ -93,6 +100,27 @@ def draw():
         main_screen()
     elif show_cards_display == True:
         show_cards()
+        
+    
+    if millis() < player1millis + 1500: 
+        cardLimitText()
+        text(str(player1_name) + " heeft al drie kaarten.", screenWidth/2, 850)
+    if millis() < player2millis + 1500:  
+        cardLimitText()
+        text(str(player2_name) + " heeft al drie kaarten.", screenWidth/2, 850)
+    if millis() < player3millis + 1500:
+        cardLimitText() 
+        text(str(player3_name) + " heeft al drie kaarten.", screenWidth/2, 850)
+    if millis() < player4millis + 1500:
+        cardLimitText() 
+        text(str(player4_name) + " heeft al drie kaarten.", screenWidth/2, 850)
+    if millis() < player5millis + 1500:
+        cardLimitText()
+        text(str(player5_name) + " heeft al drie kaarten.", screenWidth/2, 850)
+    if millis() < player6millis + 1500:
+        cardLimitText() 
+        text(str(player6_name) + " heeft al drie kaarten.", screenWidth/2, 850)
+
         
 
 #Asks the user how many players are playing the game at the moment and stores that in a variable.
@@ -346,6 +374,28 @@ def show_cards():
         textY += 180
         x += 1
         
+    text("Aantal Kaarten = " + "0 / 3", screenWidth/2, 850)
+    if x == 1:
+        cardLimitText() 
+        text("Aantal Kaarten = " + str(x) + " / 3", screenWidth/2, 850)
+    elif x == 2:
+        cardLimitText() 
+        text("Aantal Kaarten = " + str(x) + " / 3", screenWidth/2, 850)
+    elif x == 3:
+        cardLimitText() 
+        text("Aantal Kaarten = " + str(x) + " / 3", screenWidth/2, 850)
+    else:
+        cardLimitText() 
+        text("Aantal Kaarten = " + str(x) + " / 3", screenWidth/2, 850)
+
+def cardLimitText():
+    fill(148, 120, 214)
+    noStroke()
+    rect(500, 800, 500, 200)
+    fill(0) 
+    stroke(0)
+    textSize(30)
+
     
 #Handles all the clicking of buttons in the program
 def mousePressed():
@@ -458,89 +508,116 @@ def mousePressed():
         if begin_ok_button == False:
             if (mouseX >= screenWidth/2 + 160 and mouseX <= screenWidth/2 + 220) and (mouseY >= screenHeight/2 - 20 and mouseY <= screenHeight/2 + 20):
                 begin_ok_button = True
-        else:
-            if (mouseX >= 100 and mouseX <= 180) and (mouseY >= 180 and mouseY <= 260):
-                if len(fieldcard_list) > 0:
-                    player1_fieldcards.append(generate_field_card())        
+        
+        elif (mouseX >= 100 and mouseX <= 180) and (mouseY >= 180 and mouseY <= 260):
+            if len(fieldcard_list) > 0:
+                player1_cardtotal += 1
+                if player1_cardtotal > 3:
+                    player1millis = millis()
+                    player1_cardtotal -= 1
+                else: 
+                    player1_fieldcards.append(generate_field_card())       
             
-            elif (mouseX >= 100 and mouseX <= 180) and (mouseY >= 413 and mouseY <= 493):
-                if len(fieldcard_list) > 0:
+        
+        elif (mouseX >= 100 and mouseX <= 180) and (mouseY >= 413 and mouseY <= 493):
+            if len(fieldcard_list) > 0:
+                player2_cardtotal += 1
+                if player2_cardtotal > 3:
+                    player2millis = millis()
+                    player2_cardtotal -= 1
+                else:
                     player2_fieldcards.append(generate_field_card())
-                    
-            elif (mouseX >= 100 and mouseX <= 180) and (mouseY >= 646 and mouseY <= 726):
-                if len(fieldcard_list) > 0:
+                
+        elif (mouseX >= 100 and mouseX <= 180) and (mouseY >= 646 and mouseY <= 726):
+            if len(fieldcard_list) > 0:
+                player3_cardtotal += 1
+                if player3_cardtotal > 3:
+                    player3millis = millis()
+                    player3_cardtotal -= 1
+                else:
                     player3_fieldcards.append(generate_field_card())
-                
-            elif ((mouseX >= 750 and mouseX <= 830) and (mouseY >= 180 and mouseY <= 260)) and number_of_players > 3:
-                if len(fieldcard_list) > 0:
+            
+        elif ((mouseX >= 750 and mouseX <= 830) and (mouseY >= 180 and mouseY <= 260)) and number_of_players > 3:
+            if len(fieldcard_list) > 0:
+                player4_cardtotal += 1
+                if player4_cardtotal > 3:
+                    player4millis = millis()
+                    player4_cardtotal -= 1
+                else:
                     player4_fieldcards.append(generate_field_card())
-            
-            elif ((mouseX >= 750 and mouseX <= 830) and (mouseY >= 413 and mouseY <= 493)) and number_of_players > 4:
-                if len(fieldcard_list) > 0:
+        
+        elif ((mouseX >= 750 and mouseX <= 830) and (mouseY >= 413 and mouseY <= 493)) and number_of_players > 4:
+            if len(fieldcard_list) > 0:
+                player5_cardtotal += 1
+                if player5_cardtotal > 3:
+                    player5millis = millis()
+                    player5_cardtotal -= 1
+                else:
                     player5_fieldcards.append(generate_field_card())
-            
-            elif ((mouseX >= 750 and mouseX <= 830) and (mouseY >= 646 and mouseY <= 726)) and number_of_players > 5:
-                if len(fieldcard_list) > 0:
+        
+        elif ((mouseX >= 750 and mouseX <= 830) and (mouseY >= 646 and mouseY <= 726)) and number_of_players > 5:
+            if len(fieldcard_list) > 0:
+                player6_cardtotal += 1
+                if player6_cardtotal > 3:
+                    player6millis = millis()
+                    player6_cardtotal -= 1
+                else:
                     player6_fieldcards.append(generate_field_card())
-                    
-            elif (mouseX >= 190 and mouseX <= 270) and (mouseY >= 180 and mouseY <= 260):
-                if len(trapcard_list) > 0:
+                
+        elif (mouseX >= 190 and mouseX <= 270) and (mouseY >= 180 and mouseY <= 260):
+            if len(trapcard_list) > 0:
+                player1_cardtotal += 1
+                if player1_cardtotal > 3:
+                    player1millis = millis()
+                    player1_cardtotal -= 1
+                else:
                     player1_trapcards.append(generate_trap_card())
-                    
-            elif (mouseX >= 190 and mouseX <= 270) and (mouseY >= 413 and mouseY <= 493):
-                if len(trapcard_list) > 0:
-                    player2_trapcards.append(generate_trap_card())
-                    
-            elif (mouseX >= 190 and mouseX <= 270) and (mouseY >= 646 and mouseY <= 726):
-                if len(trapcard_list) > 0:
-                    player3_trapcards.append(generate_trap_card())
-                    
-            elif ((mouseX >= 840 and mouseX <= 920) and (mouseY >= 180 and mouseY <= 260)) and number_of_players > 3:
-                if len(trapcard_list) > 0:
-                    player4_trapcards.append(generate_trap_card())
-            
-            elif ((mouseX >= 840 and mouseX <= 920) and (mouseY >= 413 and mouseY <= 493)) and number_of_players > 4:
-                if len(trapcard_list) > 0:
-                    player5_trapcards.append(generate_trap_card())
-            
-            elif ((mouseX >= 840 and mouseX <= 920) and (mouseY >= 646 and mouseY <= 726)) and number_of_players > 5:
-                if len(trapcard_list) > 0:
-                    player6_trapcards.append(generate_trap_card())
-                    
-            elif (mouseX >= 280 and mouseX <= 370) and (mouseY >= 180 and mouseY <= 260):  
-                player_card_list_g = player1_fieldcards + player1_trapcards 
-                player_name_g = player1_name
-                    
-                show_cards_display = True
-                main_screen_display = False
                 
-            elif (mouseX >= 280 and mouseX <= 370) and (mouseY >= 413 and mouseY <= 493):  
-                player_card_list_g = player2_fieldcards + player2_trapcards 
-                player_name_g = player2_name
-                    
-                show_cards_display = True
-                main_screen_display = False
+        elif (mouseX >= 190 and mouseX <= 270) and (mouseY >= 413 and mouseY <= 493):
+            if len(trapcard_list) > 0:
+                player2_cardtotal += 1
+                if player2_cardtotal > 3:
+                  player2millis = millis()
+                  player2_cardtotal -= 1
+                else:
+                  player2_trapcards.append(generate_trap_card())
                 
-            elif (mouseX >= 280 and mouseX <= 370) and (mouseY >= 646 and mouseY <= 726):  
-                player_card_list_g = player3_fieldcards + player3_trapcards 
-                player_name_g = player3_name
-                    
-                show_cards_display = True
-                main_screen_display = False
+        elif (mouseX >= 190 and mouseX <= 270) and (mouseY >= 646 and mouseY <= 726):
+            if len(trapcard_list) > 0:
+                player3_cardtotal += 1
+                if player3_cardtotal > 3:
+                  player3millis = millis()
+                  player3_cardtotal -= 1
+                else:
+                  player3_trapcards.append(generate_trap_card())
                 
-            elif ((mouseX >= 940 and mouseX <= 1020) and (mouseY >= 180 and mouseY <= 260)) and number_of_players > 3:
-                player_card_list_g = player4_fieldcards + player4_trapcards 
-                player_name_g = player4_name
-                    
-                show_cards_display = True
-                main_screen_display = False
-            
-            elif ((mouseX >= 940 and mouseX <= 1020) and (mouseY >= 413 and mouseY <= 493)) and number_of_players > 4:
-                player_card_list_g = player5_fieldcards + player5_trapcards 
-                player_name_g = player5_name
-                
-                show_cards_display = True
-                main_screen_display = False
+        elif ((mouseX >= 840 and mouseX <= 920) and (mouseY >= 180 and mouseY <= 260)) and number_of_players > 3:
+            if len(trapcard_list) > 0:
+                player4_cardtotal += 1
+                if player4_cardtotal > 3:
+                  player4millis = millis()
+                  player4_cardtotal -= 1
+                else:
+                  player4_trapcards.append(generate_trap_card())
+        
+        elif ((mouseX >= 840 and mouseX <= 920) and (mouseY >= 413 and mouseY <= 493)) and number_of_players > 4:
+            if len(trapcard_list) > 0:
+                player5_cardtotal += 1
+                if player5_cardtotal > 3:
+                  player5millis = millis()
+                  player5_cardtotal -= 1
+                else:
+                  player5_trapcards.append(generate_trap_card())
+        
+        elif ((mouseX >= 840 and mouseX <= 920) and (mouseY >= 646 and mouseY <= 726)) and number_of_players > 5:
+            if len(trapcard_list) > 0:
+                player6_cardtotal += 1
+                if player6_cardtotal > 3:
+                  player6millis = millis()
+                  player6_cardtotal -= 1
+                else:
+                  player6_trapcards.append(generate_trap_card())
+
             
             elif ((mouseX >= 940 and mouseX <= 1020) and (mouseY >= 646 and mouseY <= 726)) and number_of_players > 5:
                 player_card_list_g = player6_fieldcards + player6_trapcards 
