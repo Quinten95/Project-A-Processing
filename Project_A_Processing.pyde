@@ -6,6 +6,8 @@ name_input_screen_display = False
 main_screen_display = False
 show_cards_display = False
 
+begin_ok_button = False
+
 screenWidth = 1500
 screenHeight = 900
 
@@ -48,12 +50,11 @@ frames = []
 
 
 def setup():
-    global screenWidth, screenHeight, frame_count_main    
+    global screenWidth, screenHeight   
     global bgs, isMouseWithinSpace, gifWidth, gifHeight, value
     
     size(screenWidth, screenHeight)
     init_field_cards()
-    frame_count_main = 0
     
     gifWidth = 400
     gifHeight = 200
@@ -203,7 +204,7 @@ def name_input_screen():
 #the cards per player are shown
 #and players can use a card in their posession
 def main_screen():
-    global player_starting, frame_count_main
+    global player_starting, begin_ok_button
     
     images[3].resize(width, height)
     background(images[3])
@@ -220,15 +221,10 @@ def main_screen():
     
     player_names = [player1_name, player2_name, player3_name, player4_name, player5_name, player6_name]
     
-    
-    
-    if frame_count_main < 900:
-        fill(255, 255, 255)
-        textAlign(CENTER)
-        textFont(font4) 
-        text(player_names[player_starting] + " begint!", screenWidth/2, 100)
-    
-    
+
+
+
+
     while x < 3:
         fill(255, 255, 255)
         textAlign(LEFT)
@@ -256,8 +252,7 @@ def main_screen():
         x += 1
         y += 1
         YPositionText += 233
-        YPositionRect += 233        
-        frame_count_main += 1
+        YPositionRect += 233     
     
     YPositionText = 150
     YPositionRect = 180
@@ -290,6 +285,17 @@ def main_screen():
         y += 1
         YPositionText += 233
         YPositionRect += 233
+        
+    if begin_ok_button == False:
+        fill(155, 155, 155) 
+        rect(screenWidth/2 - 250, screenHeight/2 - 40, 500, 80, 6)
+        fill(255,255,255)
+        rect(screenWidth/2 + 160, screenHeight/2 - 20, 60, 40, 6)
+        textAlign(CENTER)
+        textFont(font4) 
+        fill(0,0,0)
+        text(player_names[player_starting] + " begint!", screenWidth/2 - 40, screenHeight/2 + 10)
+        text("OK", screenWidth/2 + 190, screenHeight/2 + 10)
 
 
 def show_cards():
@@ -351,7 +357,7 @@ def mousePressed():
     global duelCard7, duelCard8, duelCard9, duelCard10, duelCard11, duelCard12
     global trapCard_list, trapCard1, trapCard2, trapCard3, trapCard4, trapCard5
     global player_card_list_g, player_name_g, show_cards_display, player_starting
-    global isMouseWithinSpace, value, bgs
+    global isMouseWithinSpace, value, bgs, begin_ok_button
     
     if show_start_screen == True:
         if isMouseWithinSpace(1390, 850, 70, 18):
@@ -429,7 +435,7 @@ def mousePressed():
             player6_box_selected = True
             
         #Detects wheter the OK button has been pressed
-        elif (mouseX >= 720 and mouseX <= 780) and (mouseY >= 800 and mouseY <= 840):
+        elif (mouseX >= 720 and mouseX <= 780) and (mouseY >= 800 and mouseY <= 840):            
             name_input_screen_display = False
             main_screen_display = True                        
             player1_box_selected = False
@@ -449,95 +455,99 @@ def mousePressed():
             player6_box_selected = False
     
     elif main_screen_display == True:
-        if (mouseX >= 100 and mouseX <= 180) and (mouseY >= 180 and mouseY <= 260):
-            if len(fieldcard_list) > 0:
-                player1_fieldcards.append(generate_field_card())        
-        
-        elif (mouseX >= 100 and mouseX <= 180) and (mouseY >= 413 and mouseY <= 493):
-            if len(fieldcard_list) > 0:
-                player2_fieldcards.append(generate_field_card())
-                
-        elif (mouseX >= 100 and mouseX <= 180) and (mouseY >= 646 and mouseY <= 726):
-            if len(fieldcard_list) > 0:
-                player3_fieldcards.append(generate_field_card())
+        if begin_ok_button == False:
+            if (mouseX >= screenWidth/2 + 160 and mouseX <= screenWidth/2 + 220) and (mouseY >= screenHeight/2 - 20 and mouseY <= screenHeight/2 + 20):
+                begin_ok_button = True
+        else:
+            if (mouseX >= 100 and mouseX <= 180) and (mouseY >= 180 and mouseY <= 260):
+                if len(fieldcard_list) > 0:
+                    player1_fieldcards.append(generate_field_card())        
             
-        elif ((mouseX >= 750 and mouseX <= 830) and (mouseY >= 180 and mouseY <= 260)) and number_of_players > 3:
-            if len(fieldcard_list) > 0:
-                player4_fieldcards.append(generate_field_card())
-        
-        elif ((mouseX >= 750 and mouseX <= 830) and (mouseY >= 413 and mouseY <= 493)) and number_of_players > 4:
-            if len(fieldcard_list) > 0:
-                player5_fieldcards.append(generate_field_card())
-        
-        elif ((mouseX >= 750 and mouseX <= 830) and (mouseY >= 646 and mouseY <= 726)) and number_of_players > 5:
-            if len(fieldcard_list) > 0:
-                player6_fieldcards.append(generate_field_card())
+            elif (mouseX >= 100 and mouseX <= 180) and (mouseY >= 413 and mouseY <= 493):
+                if len(fieldcard_list) > 0:
+                    player2_fieldcards.append(generate_field_card())
+                    
+            elif (mouseX >= 100 and mouseX <= 180) and (mouseY >= 646 and mouseY <= 726):
+                if len(fieldcard_list) > 0:
+                    player3_fieldcards.append(generate_field_card())
                 
-        elif (mouseX >= 190 and mouseX <= 270) and (mouseY >= 180 and mouseY <= 260):
-            if len(trapcard_list) > 0:
-                player1_trapcards.append(generate_trap_card())
-                
-        elif (mouseX >= 190 and mouseX <= 270) and (mouseY >= 413 and mouseY <= 493):
-            if len(trapcard_list) > 0:
-                player2_trapcards.append(generate_trap_card())
-                
-        elif (mouseX >= 190 and mouseX <= 270) and (mouseY >= 646 and mouseY <= 726):
-            if len(trapcard_list) > 0:
-                player3_trapcards.append(generate_trap_card())
-                
-        elif ((mouseX >= 840 and mouseX <= 920) and (mouseY >= 180 and mouseY <= 260)) and number_of_players > 3:
-            if len(trapcard_list) > 0:
-                player4_trapcards.append(generate_trap_card())
-        
-        elif ((mouseX >= 840 and mouseX <= 920) and (mouseY >= 413 and mouseY <= 493)) and number_of_players > 4:
-            if len(trapcard_list) > 0:
-                player5_trapcards.append(generate_trap_card())
-        
-        elif ((mouseX >= 840 and mouseX <= 920) and (mouseY >= 646 and mouseY <= 726)) and number_of_players > 5:
-            if len(trapcard_list) > 0:
-                player6_trapcards.append(generate_trap_card())
-                
-        elif (mouseX >= 280 and mouseX <= 370) and (mouseY >= 180 and mouseY <= 260):  
-            player_card_list_g = player1_fieldcards + player1_trapcards 
-            player_name_g = player1_name
-                  
-            show_cards_display = True
-            main_screen_display = False
-              
-        elif (mouseX >= 280 and mouseX <= 370) and (mouseY >= 413 and mouseY <= 493):  
-            player_card_list_g = player2_fieldcards + player2_trapcards 
-            player_name_g = player2_name
-                  
-            show_cards_display = True
-            main_screen_display = False
-              
-        elif (mouseX >= 280 and mouseX <= 370) and (mouseY >= 646 and mouseY <= 726):  
-            player_card_list_g = player3_fieldcards + player3_trapcards 
-            player_name_g = player3_name
-                  
-            show_cards_display = True
-            main_screen_display = False
-              
-        elif ((mouseX >= 940 and mouseX <= 1020) and (mouseY >= 180 and mouseY <= 260)) and number_of_players > 3:
-            player_card_list_g = player4_fieldcards + player4_trapcards 
-            player_name_g = player4_name
-                  
-            show_cards_display = True
-            main_screen_display = False
-        
-        elif ((mouseX >= 940 and mouseX <= 1020) and (mouseY >= 413 and mouseY <= 493)) and number_of_players > 4:
-            player_card_list_g = player5_fieldcards + player5_trapcards 
-            player_name_g = player5_name
+            elif ((mouseX >= 750 and mouseX <= 830) and (mouseY >= 180 and mouseY <= 260)) and number_of_players > 3:
+                if len(fieldcard_list) > 0:
+                    player4_fieldcards.append(generate_field_card())
             
-            show_cards_display = True
-            main_screen_display = False
-        
-        elif ((mouseX >= 940 and mouseX <= 1020) and (mouseY >= 646 and mouseY <= 726)) and number_of_players > 5:
-            player_card_list_g = player6_fieldcards + player6_trapcards 
-            player_name_g = player6_name
+            elif ((mouseX >= 750 and mouseX <= 830) and (mouseY >= 413 and mouseY <= 493)) and number_of_players > 4:
+                if len(fieldcard_list) > 0:
+                    player5_fieldcards.append(generate_field_card())
             
-            show_cards_display = True
-            main_screen_display = False
+            elif ((mouseX >= 750 and mouseX <= 830) and (mouseY >= 646 and mouseY <= 726)) and number_of_players > 5:
+                if len(fieldcard_list) > 0:
+                    player6_fieldcards.append(generate_field_card())
+                    
+            elif (mouseX >= 190 and mouseX <= 270) and (mouseY >= 180 and mouseY <= 260):
+                if len(trapcard_list) > 0:
+                    player1_trapcards.append(generate_trap_card())
+                    
+            elif (mouseX >= 190 and mouseX <= 270) and (mouseY >= 413 and mouseY <= 493):
+                if len(trapcard_list) > 0:
+                    player2_trapcards.append(generate_trap_card())
+                    
+            elif (mouseX >= 190 and mouseX <= 270) and (mouseY >= 646 and mouseY <= 726):
+                if len(trapcard_list) > 0:
+                    player3_trapcards.append(generate_trap_card())
+                    
+            elif ((mouseX >= 840 and mouseX <= 920) and (mouseY >= 180 and mouseY <= 260)) and number_of_players > 3:
+                if len(trapcard_list) > 0:
+                    player4_trapcards.append(generate_trap_card())
+            
+            elif ((mouseX >= 840 and mouseX <= 920) and (mouseY >= 413 and mouseY <= 493)) and number_of_players > 4:
+                if len(trapcard_list) > 0:
+                    player5_trapcards.append(generate_trap_card())
+            
+            elif ((mouseX >= 840 and mouseX <= 920) and (mouseY >= 646 and mouseY <= 726)) and number_of_players > 5:
+                if len(trapcard_list) > 0:
+                    player6_trapcards.append(generate_trap_card())
+                    
+            elif (mouseX >= 280 and mouseX <= 370) and (mouseY >= 180 and mouseY <= 260):  
+                player_card_list_g = player1_fieldcards + player1_trapcards 
+                player_name_g = player1_name
+                    
+                show_cards_display = True
+                main_screen_display = False
+                
+            elif (mouseX >= 280 and mouseX <= 370) and (mouseY >= 413 and mouseY <= 493):  
+                player_card_list_g = player2_fieldcards + player2_trapcards 
+                player_name_g = player2_name
+                    
+                show_cards_display = True
+                main_screen_display = False
+                
+            elif (mouseX >= 280 and mouseX <= 370) and (mouseY >= 646 and mouseY <= 726):  
+                player_card_list_g = player3_fieldcards + player3_trapcards 
+                player_name_g = player3_name
+                    
+                show_cards_display = True
+                main_screen_display = False
+                
+            elif ((mouseX >= 940 and mouseX <= 1020) and (mouseY >= 180 and mouseY <= 260)) and number_of_players > 3:
+                player_card_list_g = player4_fieldcards + player4_trapcards 
+                player_name_g = player4_name
+                    
+                show_cards_display = True
+                main_screen_display = False
+            
+            elif ((mouseX >= 940 and mouseX <= 1020) and (mouseY >= 413 and mouseY <= 493)) and number_of_players > 4:
+                player_card_list_g = player5_fieldcards + player5_trapcards 
+                player_name_g = player5_name
+                
+                show_cards_display = True
+                main_screen_display = False
+            
+            elif ((mouseX >= 940 and mouseX <= 1020) and (mouseY >= 646 and mouseY <= 726)) and number_of_players > 5:
+                player_card_list_g = player6_fieldcards + player6_trapcards 
+                player_name_g = player6_name
+                
+                show_cards_display = True
+                main_screen_display = False
     
     elif show_cards_display == True:
         if (mouseX >= 1300 and mouseX <= 1440) and (mouseY >= 90 and mouseY <= 130):
@@ -904,7 +914,7 @@ def start_screen():
         textSize(50)
         
         fill(35)
-        rect(32, 700, 55, 125, 7, 6)
+        rect(32, 700, 55, 125, 7)
         noStroke()
         
         fill(255)
