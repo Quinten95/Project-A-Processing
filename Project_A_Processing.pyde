@@ -70,6 +70,9 @@ def setup():
     global images
     images = list()
     images.append(loadImage("pyramid.png"))
+    images.append(loadImage("Player_Input.jpg"))
+    images.append(loadImage("Name_Input.jpg"))
+    images.append(loadImage("MainScreen.jpg"))
     
     
 def draw():
@@ -94,12 +97,15 @@ def draw():
 #Asks the user how many players are playing the game at the moment and stores that in a variable.
 def how_many_players():
     global question, number_of_players, how_many_players_screen
+    
+    images[1].resize(width, height)
+    background(images[1])
     question = "Met hoeveel spelers speelt u?"
     
     font1 = createFont("Courier", 30)
     textFont(font1)
     textAlign(CENTER)
-    fill(0,0,0)
+    fill(255,255,255)
     text(question, screenWidth/2, 100)
     
     initiate_buttons()
@@ -134,10 +140,13 @@ def name_input_screen():
     global number_of_players, name_input_screen_display
     global player1_name, player2_name, player3_name, player4_name, player5_name, player6_name
     
+    images[2].resize(width, height)
+    background(images[2])
+    
     font1 = createFont("Courier", 30)
     textFont(font1)
     textAlign(CENTER)
-    fill(0,0,0)
+    fill(255,255,255)
     text("Number of players: " + str(number_of_players), screenWidth/2, 100)
     
     x = number_of_players
@@ -147,8 +156,7 @@ def name_input_screen():
     
     while x > 0:        
         fill(255,255,255)
-        rect(690, YPositionRect, 250, 40, 6)    
-        fill(0,0,0)
+        rect(690, YPositionRect, 250, 40, 6)
         text("Player "+ str(y)+": ", 610, YPositionText)
         x -= 1
         YPositionRect += 100
@@ -196,6 +204,10 @@ def name_input_screen():
 #and players can use a card in their posession
 def main_screen():
     global player_starting, frame_count_main
+    
+    images[3].resize(width, height)
+    background(images[3])
+    
     font1 = createFont("Courier", 30)    
     font2 = createFont("Courier", 75)
     font3 = createFont("Courier", 17)
@@ -211,14 +223,14 @@ def main_screen():
     
     
     if frame_count_main < 900:
-        fill(0, 0, 0)
+        fill(255, 255, 255)
         textAlign(CENTER)
         textFont(font4) 
         text(player_names[player_starting] + " begint!", screenWidth/2, 100)
     
     
     while x < 3:
-        fill(0, 0, 0)
+        fill(255, 255, 255)
         textAlign(LEFT)
         textFont(font1) 
         text("Player "+ str(y)+": " + player_names[x], 100, YPositionText)
@@ -251,7 +263,7 @@ def main_screen():
     YPositionRect = 180
     
     while x < number_of_players:
-        fill(0,0,0)        
+        fill(255,255,255)        
         textAlign(LEFT)
         textFont(font1)
         text("Player "+ str(y)+": " + player_names[x], 750, YPositionText)
@@ -282,10 +294,15 @@ def main_screen():
 
 def show_cards():
     global player_card_list_g, player_name_g
+    
+    images[3].resize(width, height)
+    background(images[3])
+    
     font1 = createFont("Courier", 30)
     font2 = createFont("Arial", 20)
+    
     textAlign(CENTER)
-    fill(0,0,0)
+    fill(255,255,255)
     textFont(font1)
     text("Kaarten van " + player_name_g + ":", screenWidth/2, 100) 
     
@@ -302,7 +319,7 @@ def show_cards():
     
     for i in player_card_list_g:
         textAlign(LEFT)
-        fill(0,0,0)
+        fill(255,255,255)
         textFont(font1)
         text("Kaart " + str(x) + ":", textX, textY)
         
@@ -852,20 +869,9 @@ def backgroundMusic():
 
 def start_screen():
     global bgs, isMouseWithinSpace, gifWidth, gifHeight, images
-    
-    
-    # img = loadImage("pyramid.png")
+
     images[0].resize(width, height)
-    background(images[0])
-    
-    # gif = loadImage("fallingstar.gif")
-    # gif.resize(gifWidth, gifHeight)
-    # image(gif, 0, 0)
-    
-    # gif2 = loadImage("fallingstar.gif")
-    # gif2.resize(gifWidth, gifHeight)
-    # image(gif2, 1100, 0)
-    
+    background(images[0])    
     
     image(frames[frameCount%74], 0, 0, 200, 200) #8 veranderen in aantal afbeeldingen 73 or 74.
     image(frames[frameCount%74], 1000, 10, 150, 100)
@@ -914,5 +920,4 @@ def start_screen():
             return False
     
     
-    #fill(255)
-    #text(str(millis()) + "  " + str(millis()//62%8), 100, 100)
+ 
