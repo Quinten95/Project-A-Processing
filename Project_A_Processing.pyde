@@ -110,6 +110,8 @@ def how_many_players():
     textAlign(CENTER)
     fill(255,255,255)
     text(question, screenWidth/2, 100)
+
+    text("Minimaal 3 spelers en maximaal 6 spelers", 750, 700)
     
     initiate_buttons()
     
@@ -208,7 +210,6 @@ def name_input_screen():
 #and players can use a card in their posession
 def main_screen():
     global player_starting, begin_ok_button
-    print("main screen started")
     
     images[3].resize(width, height)
     background(images[3])
