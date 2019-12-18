@@ -238,7 +238,7 @@ def main_screen():
     
     
     while x < 3:
-        fill(0, 0, 0)
+        fill(255,255,255)
         textAlign(LEFT)
         textFont(font1) 
         text("Player "+ str(y)+": " + player_names[x], 100, YPositionText)
