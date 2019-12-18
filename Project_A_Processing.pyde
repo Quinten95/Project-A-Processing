@@ -7,6 +7,7 @@ main_screen_display = False
 show_cards_display = False
 
 begin_ok_button = False
+show_manual_display = False
 
 screenWidth = 1500
 screenHeight = 900
@@ -50,7 +51,7 @@ frames = []
 
 
 def setup():
-    global screenWidth, screenHeight   
+    global screenWidth, screenHeight
     global bgs, isMouseWithinSpace, gifWidth, gifHeight, value
     
     size(screenWidth, screenHeight)
@@ -74,6 +75,7 @@ def setup():
     images.append(loadImage("Player_Input.jpg"))
     images.append(loadImage("Name_Input.jpg"))
     images.append(loadImage("MainScreen.jpg"))
+    images.append(loadImage("onlinehandleiding.png"))
     
     
 def draw():
@@ -93,12 +95,12 @@ def draw():
         main_screen()
     elif show_cards_display == True:
         show_cards()
-        
+    elif show_manual_display == True:
+        show_manual()
 
 #Asks the user how many players are playing the game at the moment and stores that in a variable.
 def how_many_players():
-    global question, number_of_players, how_many_players_screen
-    
+    global question, number_of_players, how_many_players_screen    
     images[1].resize(width, height)
     background(images[1])
     question = "Met hoeveel spelers speelt u?"
@@ -140,7 +142,7 @@ def initiate_buttons():
 def name_input_screen():
     global number_of_players, name_input_screen_display
     global player1_name, player2_name, player3_name, player4_name, player5_name, player6_name
-    
+
     images[2].resize(width, height)
     background(images[2])
     
@@ -158,6 +160,7 @@ def name_input_screen():
     while x > 0:        
         fill(255,255,255)
         rect(690, YPositionRect, 250, 40, 6)
+
         text("Player "+ str(y)+": ", 610, YPositionText)
         x -= 1
         YPositionRect += 100
@@ -205,10 +208,10 @@ def name_input_screen():
 #and players can use a card in their posession
 def main_screen():
     global player_starting, begin_ok_button
+    print("main screen started")
     
     images[3].resize(width, height)
     background(images[3])
-    
     font1 = createFont("Courier", 30)    
     font2 = createFont("Courier", 75)
     font3 = createFont("Courier", 17)
@@ -220,13 +223,21 @@ def main_screen():
     y = player_number = 1
     
     player_names = [player1_name, player2_name, player3_name, player4_name, player5_name, player6_name]
+
+    fill(255, 255, 255)
+    #handleiding
+    textFont(font1)
+    textAlign(CENTER)
+    fill(230,230,230)
+    rectMode(CENTER)
+    rect(1370, 110, 220, 40, 6)
+    fill(0,0,0)
+    text("Handleiding", 1370, 122)
+    rectMode(CORNER)
     
-
-
-
-
+    
     while x < 3:
-        fill(255, 255, 255)
+        fill(0, 0, 0)
         textAlign(LEFT)
         textFont(font1) 
         text("Player "+ str(y)+": " + player_names[x], 100, YPositionText)
@@ -309,6 +320,7 @@ def show_cards():
     
     textAlign(CENTER)
     fill(255,255,255)
+
     textFont(font1)
     text("Kaarten van " + player_name_g + ":", screenWidth/2, 100) 
     
@@ -326,6 +338,7 @@ def show_cards():
     for i in player_card_list_g:
         textAlign(LEFT)
         fill(255,255,255)
+
         textFont(font1)
         text("Kaart " + str(x) + ":", textX, textY)
         
@@ -345,7 +358,20 @@ def show_cards():
         buttonY += 180
         textY += 180
         x += 1
-        
+
+
+def show_manual():
+    global images
+    images[4].resize(width, height)
+    background(images[4])
+    
+    font1 = createFont("Courier", 30)
+    textFont(font1)
+    textAlign(CENTER)
+    fill(230,230,230)
+    rect(1300, 90, 140, 40, 6)
+    fill(0,0,0)
+    text("Terug", 1370, 122)
     
 #Handles all the clicking of buttons in the program
 def mousePressed():
@@ -358,6 +384,7 @@ def mousePressed():
     global trapCard_list, trapCard1, trapCard2, trapCard3, trapCard4, trapCard5
     global player_card_list_g, player_name_g, show_cards_display, player_starting
     global isMouseWithinSpace, value, bgs, begin_ok_button
+    global show_manual_display
     
     if show_start_screen == True:
         if isMouseWithinSpace(1390, 850, 70, 18):
@@ -435,7 +462,7 @@ def mousePressed():
             player6_box_selected = True
             
         #Detects wheter the OK button has been pressed
-        elif (mouseX >= 720 and mouseX <= 780) and (mouseY >= 800 and mouseY <= 840):            
+        elif (mouseX >= 720 and mouseX <= 780) and (mouseY >= 800 and mouseY <= 840):         
             name_input_screen_display = False
             main_screen_display = True                        
             player1_box_selected = False
@@ -453,6 +480,11 @@ def mousePressed():
             player4_box_selected = False
             player5_box_selected = False
             player6_box_selected = False
+            
+    elif show_manual_display == True:            
+        if (mouseX >= 1300 and mouseX <= 1440) and (mouseY >= 90 and mouseY <= 130):
+            main_screen_display = True
+            show_manual_display = False
     
     elif main_screen_display == True:
         if begin_ok_button == False:
@@ -462,6 +494,11 @@ def mousePressed():
             if (mouseX >= 100 and mouseX <= 180) and (mouseY >= 180 and mouseY <= 260):
                 if len(fieldcard_list) > 0:
                     player1_fieldcards.append(generate_field_card())        
+        #Handleiding Knop
+            elif (mouseX >= 1250 and mouseX < 1470) and (mouseY >=90 and mouseY <=130):
+                print("X : " + str(mouseX) + ", " + "Y: " + str(mouseY) + str(" IN SQUARE"))
+                show_manual_display = True
+                main_screen_display = False
             
             elif (mouseX >= 100 and mouseX <= 180) and (mouseY >= 413 and mouseY <= 493):
                 if len(fieldcard_list) > 0:
@@ -928,6 +965,3 @@ def start_screen():
             return True
         else:
             return False
-    
-    
- 
