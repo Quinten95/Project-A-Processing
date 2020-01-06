@@ -8,6 +8,8 @@ show_cards_display = False
 
 begin_ok_button = False
 show_manual_display = False
+show_empty_name_error = False
+
 
 screenWidth = 1500
 screenHeight = 900
@@ -46,13 +48,16 @@ trapcard_list = []
 player_card_list_g = []
 player_name_g = ''
 
+player_names = []
+player_starting = 0
+
 add_library("sound")
 frames = []
 
 
 def setup():
     global screenWidth, screenHeight
-    global bgs, isMouseWithinSpace, gifWidth, gifHeight, value
+    global bgs, bgsVolume, isMouseWithinSpace, gifWidth, gifHeight, value, s
     
     size(screenWidth, screenHeight)
     init_field_cards()
@@ -63,8 +68,13 @@ def setup():
     
     for i in range(0, 74):
         frames.append(loadImage("frame_" + (str(i) if i >= 10 else "0" + str(i)) + "_delay-0.03s.jpg"))
+
+    s = Sound(this)
             
-    backgroundMusic()
+    bgs = SoundFile(this, "Ancient Egyptian Music - Prince of Egypt.mp3")
+    bgs.play()
+    bgs.loop()
+    bgsVolume = 1.0
 
     size(1500,900)
     frameRate(60)
@@ -76,6 +86,8 @@ def setup():
     images.append(loadImage("Name_Input.jpg"))
     images.append(loadImage("MainScreen.jpg"))
     images.append(loadImage("onlinehandleiding.png"))
+    images.append(loadImage("sound_button.jpg"))
+    images.append(loadImage("mute_button.jpg"))
     
     
 def draw():
@@ -126,14 +138,14 @@ def initiate_buttons():
     text(str(number_of_players), 750, 582)
     
     fill(200, 0, 0)
-    rect(650, 600, 60, 40, 6)    
+    rect(650, 550, 60, 40, 6)       
     fill(0,0,0)
-    text("-", 680, 630)
+    text("-", 680, 580)
     
     fill(0, 200, 0)
-    rect(790, 600, 60, 40, 6)    
+    rect(790, 550, 60, 40, 6)      
     fill(0,0,0)
-    text("+", 820, 632)
+    text("+", 820, 580)
     
     fill(255,255,255)
     rect(720, 600, 60, 40, 6)    
@@ -142,13 +154,15 @@ def initiate_buttons():
 
 #Creates textboxes for the players from the amount of players variable, to input their names and store them in a player variable
 def name_input_screen():
-    global number_of_players, name_input_screen_display
+    global number_of_players, name_input_screen_display, show_empty_name_error
     global player1_name, player2_name, player3_name, player4_name, player5_name, player6_name
 
     images[2].resize(width, height)
     background(images[2])
     
-    font1 = createFont("Courier", 30)
+    font1 = createFont("Courier", 30)    
+    font2 = createFont("Courier", 35)
+    
     textFont(font1)
     textAlign(CENTER)
     fill(255,255,255)
@@ -205,11 +219,22 @@ def name_input_screen():
     fill(0,0,0)
     text("OK", 750, 832)
     
+    if show_empty_name_error == True:            
+        fill(155, 155, 155) 
+        rect(screenWidth/2 - 450, screenHeight/2 - 40, 900, 80, 6)
+        fill(255,255,255)
+        rect(screenWidth/2 + 360, screenHeight/2 - 20, 60, 40, 6)
+        textAlign(CENTER)
+        textFont(font2) 
+        fill(0,0,0)
+        text("Voer voor alle spelers een naam in!", screenWidth/2 - 40, screenHeight/2 + 10)
+        text("OK", screenWidth/2 + 390, screenHeight/2 + 10)
+    
 #Creates the main playing screen in which players can choose to draw a random card
 #the cards per player are shown
 #and players can use a card in their posession
 def main_screen():
-    global player_starting, begin_ok_button
+    global player_starting, begin_ok_button, show_empty_name_error, player_names
     
     images[3].resize(width, height)
     background(images[3])
@@ -298,7 +323,7 @@ def main_screen():
         YPositionText += 233
         YPositionRect += 233
         
-    if begin_ok_button == False:
+    if begin_ok_button == False:            
         fill(155, 155, 155) 
         rect(screenWidth/2 - 250, screenHeight/2 - 40, 500, 80, 6)
         fill(255,255,255)
@@ -384,8 +409,8 @@ def mousePressed():
     global duelCard7, duelCard8, duelCard9, duelCard10, duelCard11, duelCard12
     global trapCard_list, trapCard1, trapCard2, trapCard3, trapCard4, trapCard5
     global player_card_list_g, player_name_g, show_cards_display, player_starting
-    global isMouseWithinSpace, value, bgs, begin_ok_button
-    global show_manual_display
+    global isMouseWithinSpace, value, bgs, bgsVolume, begin_ok_button
+    global show_manual_display, show_empty_name_error
     
     if show_start_screen == True:
         if isMouseWithinSpace(1390, 850, 70, 18):
@@ -401,86 +426,100 @@ def mousePressed():
                 value = 0
         
         if value == 0:
-            if isMouseWithinSpace(60, 720, 10, 10):
-                pass
-            if isMouseWithinSpace(60, 690, 10, 10):
-                pass
+            if isMouseWithinSpace(40, 720, 35, 35):
+                if bgsVolume == 0.0:
+                    bgsVolume = 1.0
+                print(bgsVolume)
+                s.volume(bgsVolume)
+            if isMouseWithinSpace(45, 780, 35, 35):
+                if bgsVolume == 1.0:
+                    bgsVolume = 0.0
+                print(bgsVolume)
+                s.volume(bgsVolume)
     
     elif how_many_players_screen == True:
-        if (mouseX >= 650 and mouseX <= 710) and (mouseY >= 600 and mouseY <= 640):
+        if (mouseX >= 650 and mouseX <= 710) and (mouseY >= 550 and mouseY <= 590):        #-1 player button
             if number_of_players > 3:
                 number_of_players -= 1
-        elif (mouseX >= 790 and mouseX <= 850) and (mouseY >= 600 and mouseY <= 640):
+        elif (mouseX >= 790 and mouseX <= 850) and (mouseY >= 550 and mouseY <= 590):      #+1 player button
             if number_of_players < 6:
                 number_of_players += 1
         elif (mouseX >= 720 and mouseX <= 780) and (mouseY >= 600 and mouseY <= 640):
             name_input_screen_display = True
             how_many_players_screen = False
+            
     
     elif name_input_screen_display == True:
+        if show_empty_name_error == True:
+            if (mouseX >= screenWidth/2 + 360 and mouseX <= screenWidth/2 + 420) and (mouseY >= screenHeight/2 - 20 and mouseY <= screenHeight/2 + 20):
+                    show_empty_name_error = False
         #Checks if the user has clicked on a certain textbox to begin input
-        if (mouseX >= 690 and mouseX <= 940) and (mouseY >= 200 and mouseY <= 240):
-            player1_box_selected = True
-            player2_box_selected = False
-            player3_box_selected = False
-            player4_box_selected = False
-            player5_box_selected = False
-            player6_box_selected = False        
-        elif (mouseX >= 690 and mouseX <= 940) and (mouseY >= 300 and mouseY <= 340):
-            player1_box_selected = False
-            player2_box_selected = True
-            player3_box_selected = False
-            player4_box_selected = False
-            player5_box_selected = False
-            player6_box_selected = False            
-        elif (mouseX >= 690 and mouseX <= 940) and (mouseY >= 400 and mouseY <= 440):
-            player1_box_selected = False
-            player2_box_selected = False
-            player3_box_selected = True
-            player4_box_selected = False
-            player5_box_selected = False
-            player6_box_selected = False        
-        elif ((mouseX >= 690 and mouseX <= 940) and (mouseY >= 500 and mouseY <= 540)) and number_of_players > 3:
-            player1_box_selected = False
-            player2_box_selected = False
-            player3_box_selected = False
-            player4_box_selected = True
-            player5_box_selected = False
-            player6_box_selected = False        
-        elif ((mouseX >= 690 and mouseX <= 940) and (mouseY >= 600 and mouseY <= 640)) and number_of_players > 4:
-            player1_box_selected = False
-            player2_box_selected = False
-            player3_box_selected = False
-            player4_box_selected = False
-            player5_box_selected = True
-            player6_box_selected = False            
-        elif ((mouseX >= 690 and mouseX <= 940) and (mouseY >= 700 and mouseY <= 740)) and number_of_players > 5:
-            player1_box_selected = False
-            player2_box_selected = False
-            player3_box_selected = False
-            player4_box_selected = False
-            player5_box_selected = False
-            player6_box_selected = True
-            
-        #Detects wheter the OK button has been pressed
-        elif (mouseX >= 720 and mouseX <= 780) and (mouseY >= 800 and mouseY <= 840):         
-            name_input_screen_display = False
-            main_screen_display = True                        
-            player1_box_selected = False
-            player2_box_selected = False
-            player3_box_selected = False
-            player4_box_selected = False
-            player5_box_selected = False
-            player6_box_selected = False
-            player_starting = int(random(0,number_of_players-1))
-            
         else:
-            player1_box_selected = False
-            player2_box_selected = False
-            player3_box_selected = False
-            player4_box_selected = False
-            player5_box_selected = False
-            player6_box_selected = False
+            if (mouseX >= 690 and mouseX <= 940) and (mouseY >= 200 and mouseY <= 240):
+                player1_box_selected = True
+                player2_box_selected = False
+                player3_box_selected = False
+                player4_box_selected = False
+                player5_box_selected = False
+                player6_box_selected = False        
+            elif (mouseX >= 690 and mouseX <= 940) and (mouseY >= 300 and mouseY <= 340):
+                player1_box_selected = False
+                player2_box_selected = True
+                player3_box_selected = False
+                player4_box_selected = False
+                player5_box_selected = False
+                player6_box_selected = False            
+            elif (mouseX >= 690 and mouseX <= 940) and (mouseY >= 400 and mouseY <= 440):
+                player1_box_selected = False
+                player2_box_selected = False
+                player3_box_selected = True
+                player4_box_selected = False
+                player5_box_selected = False
+                player6_box_selected = False        
+            elif ((mouseX >= 690 and mouseX <= 940) and (mouseY >= 500 and mouseY <= 540)) and number_of_players > 3:
+                player1_box_selected = False
+                player2_box_selected = False
+                player3_box_selected = False
+                player4_box_selected = True
+                player5_box_selected = False
+                player6_box_selected = False        
+            elif ((mouseX >= 690 and mouseX <= 940) and (mouseY >= 600 and mouseY <= 640)) and number_of_players > 4:
+                player1_box_selected = False
+                player2_box_selected = False
+                player3_box_selected = False
+                player4_box_selected = False
+                player5_box_selected = True
+                player6_box_selected = False            
+            elif ((mouseX >= 690 and mouseX <= 940) and (mouseY >= 700 and mouseY <= 740)) and number_of_players > 5:
+                player1_box_selected = False
+                player2_box_selected = False
+                player3_box_selected = False
+                player4_box_selected = False
+                player5_box_selected = False
+                player6_box_selected = True
+                
+            #Detects wheter the OK button has been pressed
+            elif (mouseX >= 720 and mouseX <= 780) and (mouseY >= 800 and mouseY <= 840):        
+                if player1_name == '' or player2_name == '' or player3_name == '':
+                    show_empty_name_error = True
+                elif number_of_players > 3 and player4_name == '':
+                    show_empty_name_error = True
+                elif number_of_players > 4 and player5_name == '':
+                    show_empty_name_error = True
+                elif number_of_players > 5 and player6_name == '':
+                    show_empty_name_error = True                                
+                else:
+                    show_empty_name_error = False
+                    name_input_screen_display = False
+                    main_screen_display = True                        
+                    player1_box_selected = False
+                    player2_box_selected = False
+                    player3_box_selected = False
+                    player4_box_selected = False
+                    player5_box_selected = False
+                    player6_box_selected = False
+                    player_starting = int(random(0,number_of_players-1))
+                        
             
     elif show_manual_display == True:            
         if (mouseX >= 1300 and mouseX <= 1440) and (mouseY >= 90 and mouseY <= 130):
@@ -909,11 +948,6 @@ def generate_trap_card():
     else:
         pass
 
-    
-def backgroundMusic():
-    bgs = SoundFile(this, "Ancient Egyptian Music - Prince of Egypt.mp3")
-    bgs.play()
-    bgs.loop()
 
 def start_screen():
     global bgs, isMouseWithinSpace, gifWidth, gifHeight, images
@@ -944,7 +978,7 @@ def start_screen():
     fill(value)
     text(">", 60, 840)
     
-    
+    #volume_buttons
     if value == 0:
         textSize(70)
         fill(255)
@@ -956,11 +990,12 @@ def start_screen():
         noStroke()
         
         fill(255)
-        text("+", 60, 720)
-        text("-", 60, 790)
-        
+        img = images[5]
+        image(img, 40, 720)   #sound_button
+        img2 = images[6]
+        image(img2, 45, 780)  #mute_button
 
-    
+  
     def isMouseWithinSpace(x, y, breedte, hoogte):
         if x < mouseX < x + breedte and y < mouseY < y + hoogte:
             return True
