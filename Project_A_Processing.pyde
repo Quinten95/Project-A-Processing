@@ -402,7 +402,7 @@ def show_cards():
         fill(255,255,255)
 
         textFont(font1)
-        text("Kaart " + str(x) + ":", textX, textY)
+        text("Kaart " + str(x + 1) + ":", textX, textY)
         
         textFont(font2)
         text(i, textX, textY + 30)
