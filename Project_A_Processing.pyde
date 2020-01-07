@@ -352,7 +352,7 @@ def show_cards():
     textY = 200
     buttonX = 1100
     buttonY = 220
-    x = 1
+    x = 0
     
     fill(230,230,230)
     rect(1300, 90, 140, 40, 6)
@@ -399,7 +399,7 @@ def show_cards():
 def cardLimitText():
     fill(148, 120, 214)
     noStroke()
-    rect(500, 800, 500, 200)
+    rect(450, 800, 600, 200)
     fill(0) 
     stroke(0)
     textSize(30)
@@ -628,13 +628,47 @@ def mousePressed():
                 else:
                   player6_trapcards.append(generate_trap_card())
 
-            
-            elif ((mouseX >= 940 and mouseX <= 1020) and (mouseY >= 646 and mouseY <= 726)) and number_of_players > 5:
-                player_card_list_g = player6_fieldcards + player6_trapcards 
-                player_name_g = player6_name
-                
+        elif (mouseX >= 280 and mouseX <= 370) and (mouseY >= 180 and mouseY <= 260):  
+                player_card_list_g = player1_fieldcards + player1_trapcards 
+                player_name_g = player1_name
+                    
                 show_cards_display = True
                 main_screen_display = False
+                
+        elif (mouseX >= 280 and mouseX <= 370) and (mouseY >= 413 and mouseY <= 493):  
+            player_card_list_g = player2_fieldcards + player2_trapcards 
+            player_name_g = player2_name
+                
+            show_cards_display = True
+            main_screen_display = False
+            
+        elif (mouseX >= 280 and mouseX <= 370) and (mouseY >= 646 and mouseY <= 726):  
+            player_card_list_g = player3_fieldcards + player3_trapcards 
+            player_name_g = player3_name
+                
+            show_cards_display = True
+            main_screen_display = False
+            
+        elif ((mouseX >= 940 and mouseX <= 1020) and (mouseY >= 180 and mouseY <= 260)) and number_of_players > 3:
+            player_card_list_g = player4_fieldcards + player4_trapcards 
+            player_name_g = player4_name
+                
+            show_cards_display = True
+            main_screen_display = False
+        
+        elif ((mouseX >= 940 and mouseX <= 1020) and (mouseY >= 413 and mouseY <= 493)) and number_of_players > 4:
+            player_card_list_g = player5_fieldcards + player5_trapcards 
+            player_name_g = player5_name
+            
+            show_cards_display = True
+            main_screen_display = False
+        
+        elif ((mouseX >= 940 and mouseX <= 1020) and (mouseY >= 646 and mouseY <= 726)) and number_of_players > 5:
+            player_card_list_g = player6_fieldcards + player6_trapcards 
+            player_name_g = player6_name
+            
+            show_cards_display = True
+            main_screen_display = False
     
     elif show_cards_display == True:
         if (mouseX >= 1300 and mouseX <= 1440) and (mouseY >= 90 and mouseY <= 130):
