@@ -52,7 +52,6 @@ player_names = []
 player_starting = -1
 
 add_library("sound")
-frames = []
 side = -1
 side2 = -1
 number_of_dices = 2
@@ -74,19 +73,13 @@ player6_cardtotal = 0
 
 def setup():
     global screenWidth, screenHeight
-    global bgs, bgsVolume, isMouseWithinSpace, gifWidth, gifHeight, value, s
+    global bgs, bgsVolume, isMouseWithinSpace, value, s
 
     size(screenWidth, screenHeight)
     init_field_cards()
     
     side = int(random(1,7))
-    
-    gifWidth = 400
-    gifHeight = 200
     value = 255
-    
-    for i in range(0, 74):
-        frames.append(loadImage("frame_" + (str(i) if i >= 10 else "0" + str(i)) + "_delay-0.03s.jpg"))
 
     s = Sound(this)
             
@@ -100,13 +93,11 @@ def setup():
     
     global images
     images = list()
-    images.append(loadImage("pyramid.png"))
-    images.append(loadImage("Player_Input.jpg"))
-    images.append(loadImage("Name_Input.jpg"))
-    images.append(loadImage("MainScreen.jpg"))
-    images.append(loadImage("onlinehandleiding.png"))
+    images.append(loadImage("background_scroll.jpeg"))
+    images.append(loadImage("Handleiding.jpeg"))
     images.append(loadImage("sound_button.jpg"))
     images.append(loadImage("mute_button.jpg"))
+    images.append(loadImage("sound_menu.jpeg"))
     
     global dice1
     dice1 = list()
@@ -171,14 +162,14 @@ def draw():
 #Asks the user how many players are playing the game at the moment and stores that in a variable.
 def how_many_players():
     global question, number_of_players, how_many_players_screen    
-    images[1].resize(width, height)
-    background(images[1])
+    images[0].resize(width, height)
+    background(images[0])
     question = "Met hoeveel spelers speelt u?"
     
     font1 = createFont("Courier", 30)
     textFont(font1)
     textAlign(CENTER)
-    fill(255,255,255)
+    fill(0)
     text(question, screenWidth/2, 100)
 
     text("Minimaal 3 spelers en maximaal 6 spelers", 750, 700)
@@ -190,24 +181,24 @@ def how_many_players():
 def initiate_buttons():
     global number_of_players, screenWidth, screenHeight
     
-    fill(255,255,255)
+    fill(255)
     rect(720, 550, 60, 40, 6)    
-    fill(0,0,0)
+    fill(0)
     text(str(number_of_players), 750, 582)
     
     fill(200, 0, 0)
     rect(650, 550, 60, 40, 6)       
-    fill(0,0,0)
+    fill(0)
     text("-", 680, 580)
     
     fill(0, 200, 0)
     rect(790, 550, 60, 40, 6)      
-    fill(0,0,0)
+    fill(0)
     text("+", 820, 580)
     
-    fill(255,255,255)
+    fill(255)
     rect(720, 600, 60, 40, 6)    
-    fill(0,0,0)
+    fill(0)
     text("OK", 750, 632)
 
 #Creates textboxes for the players from the amount of players variable, to input their names and store them in a player variable
@@ -215,15 +206,15 @@ def name_input_screen():
     global number_of_players, name_input_screen_display, show_empty_name_error
     global player1_name, player2_name, player3_name, player4_name, player5_name, player6_name
 
-    images[2].resize(width, height)
-    background(images[2])
+    images[0].resize(width, height)
+    background(images[0])
     
     font1 = createFont("Courier", 30)    
     font2 = createFont("Courier", 35)
     
     textFont(font1)
     textAlign(CENTER)
-    fill(255,255,255)
+    fill(0)
     text("Number of players: " + str(number_of_players), screenWidth/2, 100)
     
     x = number_of_players
@@ -232,9 +223,9 @@ def name_input_screen():
     y = player_number = 1
     
     while x > 0:        
-        fill(255,255,255)
+        fill(255)
         rect(690, YPositionRect, 250, 40, 6)
-
+        fill(0)
         text("Player "+ str(y)+": ", 610, YPositionText)
         x -= 1
         YPositionRect += 100
@@ -262,7 +253,7 @@ def name_input_screen():
     
     font1 = createFont("Courier", 30)
     textFont(font1)
-    fill(0, 0, 0)    
+    fill(0)    
     textAlign(LEFT)
     text(player1_name, 700, 232)    
     text(player2_name, 700, 332)    
@@ -272,19 +263,19 @@ def name_input_screen():
     text(player6_name, 700, 732)
     
     textAlign(CENTER)
-    fill(255,255,255)
+    fill(255)
     rect(720, 800, 60, 40, 6)    
-    fill(0,0,0)
+    fill(0)
     text("OK", 750, 832)
     
     if show_empty_name_error == True:            
         fill(155, 155, 155) 
         rect(screenWidth/2 - 450, screenHeight/2 - 40, 900, 80, 6)
-        fill(255,255,255)
+        fill(255)
         rect(screenWidth/2 + 360, screenHeight/2 - 20, 60, 40, 6)
         textAlign(CENTER)
         textFont(font2) 
-        fill(0,0,0)
+        fill(0)
         text("Voer voor alle spelers een naam in!", screenWidth/2 - 40, screenHeight/2 + 10)
         text("OK", screenWidth/2 + 390, screenHeight/2 + 10)
     
@@ -294,8 +285,8 @@ def name_input_screen():
 def main_screen():
     global player_starting, begin_ok_button, show_empty_name_error, player_names, dice1, side, side2, number_of_dice
     
-    images[3].resize(width, height)
-    background(images[3])
+    images[0].resize(width, height)
+    background(images[0])
     font1 = createFont("Courier", 30)    
     font2 = createFont("Courier", 75)
     font3 = createFont("Courier", 17)
@@ -308,38 +299,38 @@ def main_screen():
     
     player_names = [player1_name, player2_name, player3_name, player4_name, player5_name, player6_name]
 
-    fill(255, 255, 255)
+    fill(255)
     #handleiding
     textFont(font1)
     textAlign(CENTER)
-    fill(230,230,230)
+    fill(255)
     rectMode(CENTER)
     rect(1370, 110, 220, 40, 6)
-    fill(0,0,0)
+    fill(0)
     text("Handleiding", 1370, 122)
     rectMode(CORNER)
     
     while x < 3:
-        fill(255,255,255)
+        fill(0)
         textAlign(LEFT)
         textFont(font1) 
         text("Player "+ str(y)+": " + player_names[x], 100, YPositionText)
         
         textFont(font2)
         textAlign(CENTER)    
-        fill(230,230,230)
+        fill(255)
         rect(100, YPositionRect, 80, 80, 6)
-        fill(0,0,0)
+        fill(0)
         text("?", 140, YPositionRect+65)
         
-        fill(230,230,230)
+        fill(255)
         rect(190, YPositionRect, 80, 80, 6)
-        fill(0,0,0)
+        fill(0)
         text("!", 230, YPositionRect+65)
         
-        fill(230,230,230)
+        fill(255)
         rect(290, YPositionRect, 80, 80, 6)
-        fill(0,0,0)
+        fill(0)
         textFont(font3)
         text("Kaarten", 331, YPositionRect+44)
         
@@ -352,26 +343,26 @@ def main_screen():
     YPositionRect = 180
     
     while x < number_of_players:
-        fill(255,255,255)        
+        fill(0)        
         textAlign(LEFT)
         textFont(font1)
         text("Player "+ str(y)+": " + player_names[x], 750, YPositionText)
         
         textFont(font2)
         textAlign(CENTER)        
-        fill(230,230,230)
+        fill(255)
         rect(750, YPositionRect, 80, 80, 6)
-        fill(0,0,0)
+        fill(0)
         text("?", 790, YPositionRect+65)
         
-        fill(230,230,230)
+        fill(255)
         rect(840, YPositionRect, 80, 80, 6)
-        fill(0,0,0)
+        fill(0)
         text("!", 880, YPositionRect+65)
         
-        fill(230,230,230)
+        fill(255)
         rect(930, YPositionRect, 80, 80, 6)
-        fill(0,0,0)
+        fill(0)
         textFont(font3)
         text("Kaarten", 971, YPositionRect+44)
         
@@ -381,18 +372,19 @@ def main_screen():
         YPositionRect += 233
         
     if begin_ok_button == False:            
-        fill(155, 155, 155) 
+        fill(0) 
         rect(screenWidth/2 - 250, screenHeight/2 - 40, 500, 80, 6)
-        fill(255,255,255)
+        fill(255)
         rect(screenWidth/2 + 160, screenHeight/2 - 20, 60, 40, 6)
         textAlign(CENTER)
         textFont(font4) 
-        fill(0,0,0)
+        fill(255)
         text(player_names[player_starting] + " begint!", screenWidth/2 - 40, screenHeight/2 + 10)
+        fill(0)
         text("OK", screenWidth/2 + 190, screenHeight/2 + 10)
 
     textFont(font1)
-    fill(255, 255, 255)
+    fill(255)
     rect(1280, 240, 40, 40, 6) #diceoption1  
     rect(1350, 240, 40, 40, 6) #diceoption2  
     rect(1260, 420, 150, 150, 6) #dice1
@@ -400,11 +392,10 @@ def main_screen():
         rect(1260, 670, 150, 150, 6) #dice2 
         
     rect(1274, 603, 120, 35, 6) #rolldice
-    fill(255)
+    fill(0)
     textSize(18)
     text("Aantal dobbelstenen:", 1330, 220)
     textFont(font1)
-    fill(0,0,0)
     text("1", 1300, 270)
     text("2", 1370, 270)
     text("Roll!", 1335, 630)
@@ -452,14 +443,14 @@ def main_screen():
 def show_cards():
     global player_card_list_g, player_name_g
     
-    images[3].resize(width, height)
-    background(images[3])
+    images[0].resize(width, height)
+    background(images[0])
     
     font1 = createFont("Courier", 30)
     font2 = createFont("Arial", 20)
     
     textAlign(CENTER)
-    fill(255,255,255)
+    fill(0)
 
     textFont(font1)
     text("Kaarten van " + player_name_g + ":", screenWidth/2, 100) 
@@ -472,12 +463,12 @@ def show_cards():
     
     fill(250, 250, 250)
     rect(1300, 90, 140, 40, 6)
-    fill(0,0,0)
+    fill(0)
     text("Terug", 1370, 122)
     
     for i in player_card_list_g:
         textAlign(LEFT)
-        fill(255,255,255)
+        fill(0)
 
         textFont(font1)
         text("Kaart " + str(x + 1) + ":", textX, textY)
@@ -485,9 +476,9 @@ def show_cards():
         textFont(font2)
         text(i, textX, textY + 30)
         
-        fill(230,230,230)
+        fill(255)
         rect(buttonX, buttonY, 160, 40, 6)   
-        fill(0,0,0)
+        fill(0)
         textAlign(CENTER)     
         textFont(font1)
         text("Gebruik!", buttonX + 80, buttonY + 31)
@@ -502,15 +493,15 @@ def show_cards():
 
 def show_manual():
     global images
-    images[4].resize(width, height)
-    background(images[4])
+    images[1].resize(width, height)
+    background(images[1])
     
     font1 = createFont("Courier", 30)
     textFont(font1)
     textAlign(CENTER)
-    fill(230,230,230)
+    fill(255)
     rect(1300, 90, 140, 40, 6)
-    fill(0,0,0)
+    fill(0)
     text("Terug", 1370, 122)
         
     
@@ -518,7 +509,7 @@ def show_manual():
 def cardLimitText():    
     fill(155, 155, 155) 
     rect(screenWidth/2 - 350, screenHeight/2 - 40, 700, 80, 6)
-    fill(0,0,0)
+    fill(0)
     textAlign(CENTER)
 
 #Handles all the clicking of buttons in the program
@@ -573,12 +564,10 @@ def mousePressed():
             if isMouseWithinSpace(40, 720, 35, 35):
                 if bgsVolume == 0.0:
                     bgsVolume = 1.0
-                print(bgsVolume)
                 s.volume(bgsVolume)
             if isMouseWithinSpace(45, 780, 35, 35):
                 if bgsVolume == 1.0:
                     bgsVolume = 0.0
-                print(bgsVolume)
                 s.volume(bgsVolume)
     
     elif how_many_players_screen == True:
@@ -587,7 +576,7 @@ def mousePressed():
             if red_button == True:
                 fill(100, 0, 0)
                 rect(650, 550, 60, 40, 6)       
-                fill(0,0,0)
+                fill(0)
                 text("-", 680, 580)
                 if (mouseX >= 650 and mouseX <= 710) and (mouseY >= 550 and mouseY <= 590):        #-1 player button
                     if number_of_players > 3:
@@ -597,7 +586,7 @@ def mousePressed():
             if blue_button == True:
                 fill(0, 100, 0)
                 rect(790, 550, 60, 40, 6)      
-                fill(0,0,0)
+                fill(0)
                 text("+", 820, 580)
                 if (mouseX >= 790 and mouseX <= 850) and (mouseY >= 550 and mouseY <= 590):      #+1 player button
                     if number_of_players < 6:
@@ -606,7 +595,7 @@ def mousePressed():
             if name_input_screen_display == False:
                 fill(155, 155, 155)
                 rect(720, 600, 60, 40, 6)    
-                fill(0,0,0)
+                fill(0)
                 text("OK", 750, 632)
                 ok_button = True
                 if ok_button == True:
@@ -694,7 +683,7 @@ def mousePressed():
             textAlign(CENTER)
             fill(35, 35, 35)
             rect(1300, 90, 140, 40, 6)
-            fill(0,0,0)
+            fill(0)
             text("Terug", 1370, 122)
             back_button = True
             if back_button == True:
@@ -710,7 +699,6 @@ def mousePressed():
         else:      
         #Handleiding Knop
             if (mouseX >= 1250 and mouseX < 1470) and (mouseY >=90 and mouseY <=130):
-                print("X : " + str(mouseX) + ", " + "Y: " + str(mouseY) + str(" IN SQUARE"))
                 show_manual_display = True
                 main_screen_display = False
         
@@ -730,20 +718,19 @@ def mousePressed():
                     fill(35, 35, 35)
                     rectMode(CENTER)
                     rect(1370, 110, 220, 40, 6)
-                    fill(0,0,0)
+                    fill(0)
                     text("Handleiding", 1370, 122)
                     rectMode(CORNER)
                     manual_button = True
                     if manual_button == True:
                         if (mouseX >= 1250 and mouseX < 1470) and (mouseY >=90 and mouseY <=130):
-                            # print("X : " + str(mouseX) + ", " + "Y: " + str(mouseY) + str(" IN SQUARE"))
                             show_manual_display = True
                             main_screen_display = False
             
             if (mouseX >= 1280 and mouseX <= 1320) and (mouseY >= 240 and mouseY <= 280):
                 fill(150, 150, 150)
                 rect(1280, 240, 40, 40, 6)
-                fill(0,0,0)
+                fill(0)
                 text("1", 1300, 270)
                 if (mouseX >= 1280 and mouseX <= 1320) and (mouseY >= 240 and mouseY <= 280):
                     number_of_dices = 1
@@ -751,7 +738,7 @@ def mousePressed():
             if (mouseX >= 1350 and mouseX <= 1390) and (mouseY >= 240 and mouseY <= 280):
                 fill(150, 150, 150)
                 rect(1350, 240, 40, 40, 6)
-                fill(0,0,0)
+                fill(0)
                 text("2", 1370, 270)
                 if (mouseX >= 1350 and mouseX <= 1390) and (mouseY >= 240 and mouseY <= 280):
                     number_of_dices = 2
@@ -759,7 +746,7 @@ def mousePressed():
             if (mouseX >= 1274 and mouseX <= 1394) and (mouseY >= 603 and mouseY <= 638):
                 fill(150, 150, 150)
                 rect(1274, 603, 120, 35, 6) #rolldice
-                fill(0,0,0)
+                fill(0)
                 text("Roll!", 1335, 630)
                 if (mouseX >= 1274 and mouseX <= 1394) and (mouseY >= 603 and mouseY <= 638):
                     font1 = createFont("Courier", 30)                
@@ -867,45 +854,17 @@ def mousePressed():
                         player6_cardtotal -= 1
                     else:
                         player6_trapcards.append(generate_trap_card())
-    
-            elif (mouseX >= 280 and mouseX <= 370) and (mouseY >= 180 and mouseY <= 260):  
-                player_card_list_g = player1_fieldcards + player1_trapcards 
-                player_name_g = player1_name
-                    
-                show_cards_display = True
-                main_screen_display = False
-                    
-            elif (mouseX >= 280 and mouseX <= 370) and (mouseY >= 413 and mouseY <= 493):  
-                player_card_list_g = player2_fieldcards + player2_trapcards 
-                player_name_g = player2_name
-                    
-                show_cards_display = True
-                main_screen_display = False
-                
-            elif (mouseX >= 280 and mouseX <= 370) and (mouseY >= 646 and mouseY <= 726):  
-                player_card_list_g = player3_fieldcards + player3_trapcards 
-                player_name_g = player3_name
-                    
-                show_cards_display = True
-                main_screen_display = False
-                
-            elif ((mouseX >= 940 and mouseX <= 1020) and (mouseY >= 180 and mouseY <= 260)) and number_of_players > 3:
-                player_card_list_g = player4_fieldcards + player4_trapcards 
-                player_name_g = player4_name
-                    
-                show_cards_display = True
-                main_screen_display = False
             
-            if (mouseX >= 280 and mouseX <= 370) and (mouseY >= 180 and mouseY <= 260):
-                fill(35, 35, 35)
-                rect(290, 200, 80, 80, 6)
-                fill(0,0,0)
+            if (mouseX >= 290 and mouseX <= 370) and (mouseY >= 180 and mouseY <= 260):
+                fill(35)
+                rect(290, 180, 80, 80, 6)
+                fill(0)
                 font3 = createFont("Courier", 17)
                 textFont(font3)
                 text("Kaarten", 331, 200+44)
                 kaarten1_button = True
                 if kaarten1_button == True:
-                    if (mouseX >= 280 and mouseX <= 370) and (mouseY >= 180 and mouseY <= 260):  
+                    if (mouseX >= 290 and mouseX <= 370) and (mouseY >= 180 and mouseY <= 260):  
                         player_card_list_g = player1_fieldcards + player1_trapcards 
                         player_name_g = player1_name
                         
@@ -913,80 +872,80 @@ def mousePressed():
                         main_screen_display = False
             
             
-            if (mouseX >= 280 and mouseX <= 370) and (mouseY >= 413 and mouseY <= 493):
-                fill(35, 35, 35)
-                rect(290, 200, 80, 80, 6)
-                fill(0,0,0)
+            if (mouseX >= 290 and mouseX <= 370) and (mouseY >= 413 and mouseY <= 493):
+                fill(35)
+                rect(290, 413, 80, 80, 6)
+                fill(0)
                 font3 = createFont("Courier", 17)
                 textFont(font3)
                 text("Kaarten", 331, 200+44)
                 kaarten2_button = True
                 if kaarten2_button == True:
-                    if (mouseX >= 280 and mouseX <= 370) and (mouseY >= 413 and mouseY <= 493):  
+                    if (mouseX >= 290 and mouseX <= 370) and (mouseY >= 413 and mouseY <= 493):  
                         player_card_list_g = player2_fieldcards + player2_trapcards 
                         player_name_g = player2_name
                             
                         show_cards_display = True
                         main_screen_display = False
                 
-            if (mouseX >= 280 and mouseX <= 370) and (mouseY >= 646 and mouseY <= 726):
-                fill(35, 35, 35)
-                rect(290, 200, 80, 80, 6)
-                fill(0,0,0)
+            if (mouseX >= 290 and mouseX <= 370) and (mouseY >= 646 and mouseY <= 726):
+                fill(35)
+                rect(290, 646, 80, 80, 6)
+                fill(0)
                 font3 = createFont("Courier", 17)
                 textFont(font3)
                 text("Kaarten", 331, 200+44)
                 kaarten2_button = True
                 if kaarten2_button == True:
-                    if (mouseX >= 280 and mouseX <= 370) and (mouseY >= 646 and mouseY <= 726):
+                    if (mouseX >= 290 and mouseX <= 370) and (mouseY >= 646 and mouseY <= 726):
                         player_card_list_g = player3_fieldcards + player3_trapcards 
                         player_name_g = player3_name
                             
                         show_cards_display = True
                         main_screen_display = False
             
-            if ((mouseX >= 940 and mouseX <= 1020) and (mouseY >= 180 and mouseY <= 260)) and number_of_players > 3:
+            if ((mouseX >= 930 and mouseX <= 1010) and (mouseY >= 180 and mouseY <= 260)) and number_of_players > 3:
                 fill(35, 35, 35)
-                rect(290, 200, 80, 80, 6)
-                fill(0,0,0)
+                rect(930, 180, 80, 80, 6)
+                fill(0)
                 font3 = createFont("Courier", 17)
                 textFont(font3)
                 text("Kaarten", 331, 200+44)
                 kaarten3_button = True
                 if kaarten3_button == True:
-                    if ((mouseX >= 940 and mouseX <= 1020) and (mouseY >= 180 and mouseY <= 260)) and number_of_players > 3:
+                    if ((mouseX >= 930 and mouseX <= 1010) and (mouseY >= 180 and mouseY <= 260)) and number_of_players > 3:
                         player_card_list_g = player4_fieldcards + player4_trapcards 
                         player_name_g = player4_name
                             
                         show_cards_display = True
                         main_screen_display = False
             
-            if ((mouseX >= 940 and mouseX <= 1020) and (mouseY >= 413 and mouseY <= 493)) and number_of_players > 4:
+            if ((mouseX >= 930 and mouseX <= 1010) and (mouseY >= 413 and mouseY <= 493)) and number_of_players > 4:
                 fill(35, 35, 35)
-                rect(290, 200, 80, 80, 6)
-                fill(0,0,0)
+                rect(930, 413, 80, 80, 6)
+                fill(0)
                 font3 = createFont("Courier", 17)
                 textFont(font3)
                 text("Kaarten", 331, 200+44)
                 kaarten4_button = True
                 if kaarten4_button == True:
-                    if ((mouseX >= 940 and mouseX <= 1020) and (mouseY >= 413 and mouseY <= 493)) and number_of_players > 4:
+                    if ((mouseX >= 930 and mouseX <= 1010) and (mouseY >= 413 and mouseY <= 493)) and number_of_players > 4:
                         player_card_list_g = player5_fieldcards + player5_trapcards 
                         player_name_g = player5_name
                         
                         show_cards_display = True
                         main_screen_display = False
                         
-            if ((mouseX >= 940 and mouseX <= 1020) and (mouseY >= 646 and mouseY <= 726)) and number_of_players > 5:
+            if ((mouseX >= 930 and mouseX <= 1010) and (mouseY >= 646 and mouseY <= 726)) and number_of_players > 5:
                 fill(35, 35, 35)
-                rect(290, 200, 80, 80, 6)
-                fill(0,0,0)
+                rect(930, 646, 80, 80, 6)
+                fill(0)
                 font3 = createFont("Courier", 17)
                 textFont(font3)
                 text("Kaarten", 331, 200+44)
                 kaarten5_button = True
                 if kaarten5_button == True:
-                    if ((mouseX >= 940 and mouseX <= 1020) and (mouseY >= 646 and mouseY <= 726)) and number_of_players > 5:
+                    if ((mouseX >= 930 and mouseX <= 1010) and (mouseY >= 646 and mouseY <= 726)) and number_of_players > 5:
                         player_card_list_g = player6_fieldcards + player6_trapcards 
                         player_name_g = player6_name
                         
@@ -997,7 +956,7 @@ def mousePressed():
         if (mouseX >= 1300 and mouseX <= 1440) and (mouseY >= 90 and mouseY <= 130):
             fill(100, 100, 100)
             rect(1300, 90, 140, 40, 6)
-            fill(0,0,0)
+            fill(0)
             text("Terug", 1370, 122)
             if (mouseX >= 1300 and mouseX <= 1440) and (mouseY >= 90 and mouseY <= 130):
                 main_screen_display = True
@@ -1324,16 +1283,11 @@ def start_screen():
 
     images[0].resize(width, height)
     background(images[0])    
-    
-    image(frames[frameCount%74], 0, 0, 200, 200) #8 veranderen in aantal afbeeldingen 73 or 74.
-    image(frames[frameCount%74], 1000, 10, 150, 100)
-    image(frames[frameCount%74], 500, 0, 500, 100)
-    image(frames[frameCount%74], 1300, 40, 500, 100)
 
     font = createFont("blackcherry.TTF", 100)
     textFont(font)
     textAlign(CENTER, CENTER)
-    fill(255)
+    fill(0)
     text("Dunes & Deserts", width / 2, height / 2)
 
     textSize(50)
@@ -1344,25 +1298,23 @@ def start_screen():
     text("Exit", 1425, 850)
     textFont(font)
     
-    textSize(70)
-    fill(value)
-    text(">", 60, 840)
+    fill(35)
+    rect(35, 840, 50, 40, 7)
+    image(images[3], 43, 845)
     
     #volume_buttons
     if value == 0:
         textSize(70)
         fill(255)
-        text("^", 60, 840)
-        textSize(50)
         
         fill(35)
         rect(32, 700, 55, 125, 7)
         noStroke()
         
         fill(255)
-        img = images[5]
+        img = images[1]
         image(img, 40, 720)   #sound_button
-        img2 = images[6]
+        img2 = images[2]
         image(img2, 45, 780)  #mute_button
 
   
