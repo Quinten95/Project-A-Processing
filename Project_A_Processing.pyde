@@ -1300,7 +1300,7 @@ def start_screen():
     
     fill(35)
     rect(35, 840, 50, 40, 7)
-    image(images[3], 43, 845)
+    image(images[4], 43, 845)
     
     #volume_buttons
     if value == 0:
@@ -1312,9 +1312,9 @@ def start_screen():
         noStroke()
         
         fill(255)
-        img = images[1]
+        img = images[2]
         image(img, 40, 720)   #sound_button
-        img2 = images[2]
+        img2 = images[3]
         image(img2, 45, 780)  #mute_button
 
   
