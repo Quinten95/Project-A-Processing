@@ -94,7 +94,7 @@ def setup():
     global images
     images = list()
     images.append(loadImage("background_scroll.jpeg"))
-    images.append(loadImage("onlinehandleiding.png"))
+    images.append(loadImage("Handleiding.jpeg"))
     images.append(loadImage("sound_button.jpg"))
     images.append(loadImage("mute_button.jpg"))
     images.append(loadImage("sound_menu.jpeg"))
@@ -392,11 +392,10 @@ def main_screen():
         rect(1260, 670, 150, 150, 6) #dice2 
         
     rect(1274, 603, 120, 35, 6) #rolldice
-    fill(255)
+    fill(0)
     textSize(18)
     text("Aantal dobbelstenen:", 1330, 220)
     textFont(font1)
-    fill(0)
     text("1", 1300, 270)
     text("2", 1370, 270)
     text("Roll!", 1335, 630)
@@ -494,8 +493,8 @@ def show_cards():
 
 def show_manual():
     global images
-    images[0].resize(width, height)
-    background(images[0])
+    images[1].resize(width, height)
+    background(images[1])
     
     font1 = createFont("Courier", 30)
     textFont(font1)
@@ -565,12 +564,10 @@ def mousePressed():
             if isMouseWithinSpace(40, 720, 35, 35):
                 if bgsVolume == 0.0:
                     bgsVolume = 1.0
-                print(bgsVolume)
                 s.volume(bgsVolume)
             if isMouseWithinSpace(45, 780, 35, 35):
                 if bgsVolume == 1.0:
                     bgsVolume = 0.0
-                print(bgsVolume)
                 s.volume(bgsVolume)
     
     elif how_many_players_screen == True:
@@ -702,7 +699,6 @@ def mousePressed():
         else:      
         #Handleiding Knop
             if (mouseX >= 1250 and mouseX < 1470) and (mouseY >=90 and mouseY <=130):
-                print("X : " + str(mouseX) + ", " + "Y: " + str(mouseY) + str(" IN SQUARE"))
                 show_manual_display = True
                 main_screen_display = False
         
@@ -728,7 +724,6 @@ def mousePressed():
                     manual_button = True
                     if manual_button == True:
                         if (mouseX >= 1250 and mouseX < 1470) and (mouseY >=90 and mouseY <=130):
-                            # print("X : " + str(mouseX) + ", " + "Y: " + str(mouseY) + str(" IN SQUARE"))
                             show_manual_display = True
                             main_screen_display = False
             
@@ -859,34 +854,6 @@ def mousePressed():
                         player6_cardtotal -= 1
                     else:
                         player6_trapcards.append(generate_trap_card())
-    
-            elif (mouseX >= 280 and mouseX <= 370) and (mouseY >= 180 and mouseY <= 260):  
-                player_card_list_g = player1_fieldcards + player1_trapcards 
-                player_name_g = player1_name
-                    
-                show_cards_display = True
-                main_screen_display = False
-                    
-            elif (mouseX >= 280 and mouseX <= 370) and (mouseY >= 413 and mouseY <= 493):  
-                player_card_list_g = player2_fieldcards + player2_trapcards 
-                player_name_g = player2_name
-                    
-                show_cards_display = True
-                main_screen_display = False
-                
-            elif (mouseX >= 280 and mouseX <= 370) and (mouseY >= 646 and mouseY <= 726):  
-                player_card_list_g = player3_fieldcards + player3_trapcards 
-                player_name_g = player3_name
-                    
-                show_cards_display = True
-                main_screen_display = False
-                
-            elif ((mouseX >= 940 and mouseX <= 1020) and (mouseY >= 180 and mouseY <= 260)) and number_of_players > 3:
-                player_card_list_g = player4_fieldcards + player4_trapcards 
-                player_name_g = player4_name
-                    
-                show_cards_display = True
-                main_screen_display = False
             
             if (mouseX >= 290 and mouseX <= 370) and (mouseY >= 180 and mouseY <= 260):
                 fill(35)
