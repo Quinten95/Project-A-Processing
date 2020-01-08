@@ -759,18 +759,33 @@ def mousePressed():
                             show_manual_display = True
                             main_screen_display = False
             
-            elif (mouseX >= 1280 and mouseX <= 1320) and (mouseY >= 240 and mouseY <= 280):
-                number_of_dices = 1
-                
-            elif (mouseX >= 1350 and mouseX <= 1390) and (mouseY >= 240 and mouseY <= 280):
-                number_of_dices = 2
+            if (mouseX >= 1280 and mouseX <= 1320) and (mouseY >= 240 and mouseY <= 280):
+                fill(150, 150, 150)
+                rect(1280, 240, 40, 40, 6)
+                fill(0,0,0)
+                text("1", 1300, 270)
+                if (mouseX >= 1280 and mouseX <= 1320) and (mouseY >= 240 and mouseY <= 280):
+                    number_of_dices = 1
+            
+            if (mouseX >= 1350 and mouseX <= 1390) and (mouseY >= 240 and mouseY <= 280):
+                fill(150, 150, 150)
+                rect(1350, 240, 40, 40, 6)
+                fill(0,0,0)
+                text("2", 1370, 270)
+                if (mouseX >= 1350 and mouseX <= 1390) and (mouseY >= 240 and mouseY <= 280):
+                    number_of_dices = 2
                             
-            elif (mouseX >= 1274 and mouseX <= 1394) and (mouseY >= 603 and mouseY <= 638):
-                font1 = createFont("Courier", 30)                
-                side = int(random(1,7))
-                side2 = int(random(1,7))
-                
-                #dice1
+            if (mouseX >= 1274 and mouseX <= 1394) and (mouseY >= 603 and mouseY <= 638):
+                fill(150, 150, 150)
+                rect(1274, 603, 120, 35, 6) #rolldice
+                fill(0,0,0)
+                text("Roll!", 1335, 630)
+                if (mouseX >= 1274 and mouseX <= 1394) and (mouseY >= 603 and mouseY <= 638):
+                    font1 = createFont("Courier", 30)                
+                    side = int(random(1,7))
+                    side2 = int(random(1,7))
+                    
+                    #dice1
                 
                 
             elif (mouseX >= 100 and mouseX <= 180) and (mouseY >= 413 and mouseY <= 493):
