@@ -53,14 +53,19 @@ player_starting = 0
 
 add_library("sound")
 frames = []
+side = -1
+side2 = -1
+number_of_dices = 1
 
 
 def setup():
     global screenWidth, screenHeight
     global bgs, bgsVolume, isMouseWithinSpace, gifWidth, gifHeight, value, s
-    
+
     size(screenWidth, screenHeight)
     init_field_cards()
+    
+    side = int(random(1,7))
     
     gifWidth = 400
     gifHeight = 200
@@ -89,6 +94,23 @@ def setup():
     images.append(loadImage("sound_button.jpg"))
     images.append(loadImage("mute_button.jpg"))
     
+    global dice1
+    dice1 = list()
+    dice1.append(loadImage("dice1.jpg"))
+    dice1.append(loadImage("dice2.jpg"))
+    dice1.append(loadImage("dice3.jpg"))
+    dice1.append(loadImage("dice4.jpg"))
+    dice1.append(loadImage("dice5.jpg"))
+    dice1.append(loadImage("dice6.jpg"))
+    
+    global dice2
+    dice2 = list()
+    dice2.append(loadImage("dice1.jpg"))
+    dice2.append(loadImage("dice2.jpg"))
+    dice2.append(loadImage("dice3.jpg"))
+    dice2.append(loadImage("dice4.jpg"))
+    dice2.append(loadImage("dice5.jpg"))
+    dice2.append(loadImage("dice6.jpg"))
     
 def draw():
     global how_many_players_screen, name_input_screen_display, main_screen_display, show_cards_display
@@ -234,7 +256,7 @@ def name_input_screen():
 #the cards per player are shown
 #and players can use a card in their posession
 def main_screen():
-    global player_starting, begin_ok_button, show_empty_name_error, player_names
+    global player_starting, begin_ok_button, show_empty_name_error, player_names, dice1, side, side2, number_of_dice
     
     images[3].resize(width, height)
     background(images[3])
@@ -260,7 +282,6 @@ def main_screen():
     fill(0,0,0)
     text("Handleiding", 1370, 122)
     rectMode(CORNER)
-    
     
     while x < 3:
         fill(255,255,255)
@@ -334,6 +355,63 @@ def main_screen():
         text(player_names[player_starting] + " begint!", screenWidth/2 - 40, screenHeight/2 + 10)
         text("OK", screenWidth/2 + 190, screenHeight/2 + 10)
 
+    textFont(font1)
+    fill(255, 255, 255)
+    rect(1280, 240, 40, 40, 6) #diceoption1  
+    rect(1350, 240, 40, 40, 6) #diceoption2  
+    rect(1260, 420, 150, 150, 6) #dice1
+    if number_of_dices == 2:
+        rect(1260, 670, 150, 150, 6) #dice2 
+        
+    rect(1274, 603, 120, 35, 6) #rolldice
+    fill(255)
+    textSize(18)
+    text("Aantal dobbelstenen:", 1330, 220)
+    textFont(font1)
+    fill(0,0,0)
+    text("1", 1300, 270)
+    text("2", 1370, 270)
+    text("Roll!", 1335, 630)
+    
+    if side == 1:
+        d1 = dice1[0]
+        image(d1, 1264, 420)
+    if side == 2:
+        d2 = dice1[1]
+        image(d2, 1264, 420)
+    if side == 3:
+        d3 = dice1[2]
+        image(d3, 1264, 420)
+    if side == 4:
+        d4 = dice1[3]
+        image(d4, 1264, 420)
+    if side == 5:
+        d5 = dice1[4]
+        image(d5, 1264, 420)
+    if side == 6:
+        d6 = dice1[5]
+        image(d6, 1264, 420)
+        
+    #dice2
+    if number_of_dices == 2:
+        if side2 == 1:
+            d1 = dice2[0]
+            image(d1, 1264, 670)
+        if side2 == 2:
+            d2 = dice2[1]
+            image(d2, 1264, 670)
+        if side2 == 3:
+            d3 = dice2[2]
+            image(d3, 1264, 670)
+        if side2 == 4:
+            d4 = dice2[3]
+            image(d4, 1264, 670)
+        if side2 == 5:
+            d5 = dice2[4]
+            image(d5, 1264, 670)
+        if side2 == 6:
+            d6 = dice2[5]
+            image(d6, 1264, 670)
 
 def show_cards():
     global player_card_list_g, player_name_g
@@ -356,7 +434,7 @@ def show_cards():
     buttonY = 220
     x = 1
     
-    fill(230,230,230)
+    fill(250, 250, 250)
     rect(1300, 90, 140, 40, 6)
     fill(0,0,0)
     text("Terug", 1370, 122)
@@ -409,16 +487,35 @@ def mousePressed():
     global duelCard7, duelCard8, duelCard9, duelCard10, duelCard11, duelCard12
     global trapCard_list, trapCard1, trapCard2, trapCard3, trapCard4, trapCard5
     global player_card_list_g, player_name_g, show_cards_display, player_starting
-    global isMouseWithinSpace, value, bgs, bgsVolume, begin_ok_button
-    global show_manual_display, show_empty_name_error
+    global isMouseWithinSpace, value, bgs, bgsVolume, begin_ok_button, font, dice1, dice2
+    global show_manual_display, show_empty_name_error, side, side2, number_of_dices
     
     if show_start_screen == True:
-        if isMouseWithinSpace(1390, 850, 70, 18):
-            exit()                                   #Exit Button
-        
-        if isMouseWithinSpace(625, 770, 275, 20):
-            how_many_players_screen = True
-            show_start_screen = False                                    #Start Game Button
+        if (mouseX >= 1390 and mouseX <= 1460) and (mouseY >= 850 and mouseY <= 868):
+            exit_button_effect = True
+            font = createFont("blackcherry.TTF", 100)
+            if exit_button_effect == True:
+                fill(50, 50, 50)
+                textSize(38)
+                text("Exit", 1425, 850)
+                textFont(font)
+                noStroke()
+                if isMouseWithinSpace(1390, 850, 70, 18):
+                    exit()                                   #Exit Button
+            
+        if (mouseX >= 625 and mouseX <= 900) and (mouseY >= 770 and mouseY <= 790):
+            if how_many_players_screen == False:                                    #start game button effect
+                fill(50, 50, 50)
+                textSize(50)
+                text("{                    }", width / 2, 770)
+                text("Start Game", width / 2, 775)
+                noStroke()
+                start = True
+                if start == True:
+                    if isMouseWithinSpace(625, 770, 275, 20):
+                        how_many_players_screen = True
+                        show_start_screen = False                                    #Start Game Button
+                        
         if isMouseWithinSpace(50, 850, 25, 20):
             if value == 0:
                 value = 255
@@ -438,15 +535,37 @@ def mousePressed():
                 s.volume(bgsVolume)
     
     elif how_many_players_screen == True:
-        if (mouseX >= 650 and mouseX <= 710) and (mouseY >= 550 and mouseY <= 590):        #-1 player button
-            if number_of_players > 3:
-                number_of_players -= 1
-        elif (mouseX >= 790 and mouseX <= 850) and (mouseY >= 550 and mouseY <= 590):      #+1 player button
-            if number_of_players < 6:
-                number_of_players += 1
-        elif (mouseX >= 720 and mouseX <= 780) and (mouseY >= 600 and mouseY <= 640):
-            name_input_screen_display = True
-            how_many_players_screen = False
+        if (mouseX >= 650 and mouseX <= 710) and (mouseY >= 550 and mouseY <= 590):
+            red_button = True
+            if red_button == True:
+                fill(100, 0, 0)
+                rect(650, 550, 60, 40, 6)       
+                fill(0,0,0)
+                text("-", 680, 580)
+                if (mouseX >= 650 and mouseX <= 710) and (mouseY >= 550 and mouseY <= 590):        #-1 player button
+                    if number_of_players > 3:
+                        number_of_players -= 1
+        if (mouseX >= 790 and mouseX <= 850) and (mouseY >= 550 and mouseY <= 590):
+            blue_button = True
+            if blue_button == True:
+                fill(0, 100, 0)
+                rect(790, 550, 60, 40, 6)      
+                fill(0,0,0)
+                text("+", 820, 580)
+                if (mouseX >= 790 and mouseX <= 850) and (mouseY >= 550 and mouseY <= 590):      #+1 player button
+                    if number_of_players < 6:
+                        number_of_players += 1
+        if (mouseX >= 720 and mouseX <= 780) and (mouseY >= 600 and mouseY <= 640):
+            if name_input_screen_display == False:
+                fill(155, 155, 155)
+                rect(720, 600, 60, 40, 6)    
+                fill(0,0,0)
+                text("OK", 750, 632)
+                ok_button = True
+                if ok_button == True:
+                    if (mouseX >= 720 and mouseX <= 780) and (mouseY >= 600 and mouseY <= 640):
+                        name_input_screen_display = True
+                        how_many_players_screen = False
             
     
     elif name_input_screen_display == True:
@@ -521,12 +640,23 @@ def mousePressed():
                     player_starting = int(random(0,number_of_players-1))
                         
             
-    elif show_manual_display == True:            
+    elif show_manual_display == True:
         if (mouseX >= 1300 and mouseX <= 1440) and (mouseY >= 90 and mouseY <= 130):
-            main_screen_display = True
-            show_manual_display = False
+            font1 = createFont("Courier", 30)
+            textFont(font1)
+            textAlign(CENTER)
+            fill(35, 35, 35)
+            rect(1300, 90, 140, 40, 6)
+            fill(0,0,0)
+            text("Terug", 1370, 122)
+            back_button = True
+            if back_button == True:
+                if (mouseX >= 1300 and mouseX <= 1440) and (mouseY >= 90 and mouseY <= 130):
+                    main_screen_display = True
+                    show_manual_display = False
     
-    elif main_screen_display == True:
+    elif main_screen_display == True: 
+        
         if begin_ok_button == False:
             if (mouseX >= screenWidth/2 + 160 and mouseX <= screenWidth/2 + 220) and (mouseY >= screenHeight/2 - 20 and mouseY <= screenHeight/2 + 20):
                 begin_ok_button = True
@@ -535,11 +665,38 @@ def mousePressed():
                 if len(fieldcard_list) > 0:
                     player1_fieldcards.append(generate_field_card())        
         #Handleiding Knop
-            elif (mouseX >= 1250 and mouseX < 1470) and (mouseY >=90 and mouseY <=130):
-                print("X : " + str(mouseX) + ", " + "Y: " + str(mouseY) + str(" IN SQUARE"))
-                show_manual_display = True
-                main_screen_display = False
+            if (mouseX >= 1250 and mouseX < 1470) and (mouseY >=90 and mouseY <=130):
+                if show_manual_display == False:
+                    font1 = createFont("Courier", 30)
+                    textFont(font1)
+                    textAlign(CENTER)
+                    fill(35, 35, 35)
+                    rectMode(CENTER)
+                    rect(1370, 110, 220, 40, 6)
+                    fill(0,0,0)
+                    text("Handleiding", 1370, 122)
+                    rectMode(CORNER)
+                    manual_button = True
+                    if manual_button == True:
+                        if (mouseX >= 1250 and mouseX < 1470) and (mouseY >=90 and mouseY <=130):
+                            # print("X : " + str(mouseX) + ", " + "Y: " + str(mouseY) + str(" IN SQUARE"))
+                            show_manual_display = True
+                            main_screen_display = False
             
+            elif (mouseX >= 1280 and mouseX <= 1320) and (mouseY >= 240 and mouseY <= 280):
+                number_of_dices = 1
+                
+            elif (mouseX >= 1350 and mouseX <= 1390) and (mouseY >= 240 and mouseY <= 280):
+                number_of_dices = 2
+                            
+            elif (mouseX >= 1274 and mouseX <= 1394) and (mouseY >= 603 and mouseY <= 638):
+                font1 = createFont("Courier", 30)                
+                side = int(random(1,7))
+                side2 = int(random(1,7))
+                
+                #dice1
+                
+                
             elif (mouseX >= 100 and mouseX <= 180) and (mouseY >= 413 and mouseY <= 493):
                 if len(fieldcard_list) > 0:
                     player2_fieldcards.append(generate_field_card())
@@ -584,52 +741,113 @@ def mousePressed():
                 if len(trapcard_list) > 0:
                     player6_trapcards.append(generate_trap_card())
                     
-            elif (mouseX >= 280 and mouseX <= 370) and (mouseY >= 180 and mouseY <= 260):  
-                player_card_list_g = player1_fieldcards + player1_trapcards 
-                player_name_g = player1_name
-                    
-                show_cards_display = True
-                main_screen_display = False
-                
-            elif (mouseX >= 280 and mouseX <= 370) and (mouseY >= 413 and mouseY <= 493):  
-                player_card_list_g = player2_fieldcards + player2_trapcards 
-                player_name_g = player2_name
-                    
-                show_cards_display = True
-                main_screen_display = False
-                
-            elif (mouseX >= 280 and mouseX <= 370) and (mouseY >= 646 and mouseY <= 726):  
-                player_card_list_g = player3_fieldcards + player3_trapcards 
-                player_name_g = player3_name
-                    
-                show_cards_display = True
-                main_screen_display = False
-                
-            elif ((mouseX >= 940 and mouseX <= 1020) and (mouseY >= 180 and mouseY <= 260)) and number_of_players > 3:
-                player_card_list_g = player4_fieldcards + player4_trapcards 
-                player_name_g = player4_name
-                    
-                show_cards_display = True
-                main_screen_display = False
             
-            elif ((mouseX >= 940 and mouseX <= 1020) and (mouseY >= 413 and mouseY <= 493)) and number_of_players > 4:
-                player_card_list_g = player5_fieldcards + player5_trapcards 
-                player_name_g = player5_name
-                
-                show_cards_display = True
-                main_screen_display = False
+            if (mouseX >= 280 and mouseX <= 370) and (mouseY >= 180 and mouseY <= 260):
+                fill(35, 35, 35)
+                rect(290, 200, 80, 80, 6)
+                fill(0,0,0)
+                font3 = createFont("Courier", 17)
+                textFont(font3)
+                text("Kaarten", 331, 200+44)
+                kaarten1_button = True
+                if kaarten1_button == True:
+                    if (mouseX >= 280 and mouseX <= 370) and (mouseY >= 180 and mouseY <= 260):  
+                        player_card_list_g = player1_fieldcards + player1_trapcards 
+                        player_name_g = player1_name
+                        
+                        show_cards_display = True
+                        main_screen_display = False
             
-            elif ((mouseX >= 940 and mouseX <= 1020) and (mouseY >= 646 and mouseY <= 726)) and number_of_players > 5:
-                player_card_list_g = player6_fieldcards + player6_trapcards 
-                player_name_g = player6_name
+            
+            if (mouseX >= 280 and mouseX <= 370) and (mouseY >= 413 and mouseY <= 493):
+                fill(35, 35, 35)
+                rect(290, 200, 80, 80, 6)
+                fill(0,0,0)
+                font3 = createFont("Courier", 17)
+                textFont(font3)
+                text("Kaarten", 331, 200+44)
+                kaarten2_button = True
+                if kaarten2_button == True:
+                    if (mouseX >= 280 and mouseX <= 370) and (mouseY >= 413 and mouseY <= 493):  
+                        player_card_list_g = player2_fieldcards + player2_trapcards 
+                        player_name_g = player2_name
+                            
+                        show_cards_display = True
+                        main_screen_display = False
                 
-                show_cards_display = True
-                main_screen_display = False
+            if (mouseX >= 280 and mouseX <= 370) and (mouseY >= 646 and mouseY <= 726):
+                fill(35, 35, 35)
+                rect(290, 200, 80, 80, 6)
+                fill(0,0,0)
+                font3 = createFont("Courier", 17)
+                textFont(font3)
+                text("Kaarten", 331, 200+44)
+                kaarten2_button = True
+                if kaarten2_button == True:
+                    if (mouseX >= 280 and mouseX <= 370) and (mouseY >= 646 and mouseY <= 726):
+                        player_card_list_g = player3_fieldcards + player3_trapcards 
+                        player_name_g = player3_name
+                            
+                        show_cards_display = True
+                        main_screen_display = False
+            
+            if ((mouseX >= 940 and mouseX <= 1020) and (mouseY >= 180 and mouseY <= 260)) and number_of_players > 3:
+                fill(35, 35, 35)
+                rect(290, 200, 80, 80, 6)
+                fill(0,0,0)
+                font3 = createFont("Courier", 17)
+                textFont(font3)
+                text("Kaarten", 331, 200+44)
+                kaarten3_button = True
+                if kaarten3_button == True:
+                    if ((mouseX >= 940 and mouseX <= 1020) and (mouseY >= 180 and mouseY <= 260)) and number_of_players > 3:
+                        player_card_list_g = player4_fieldcards + player4_trapcards 
+                        player_name_g = player4_name
+                            
+                        show_cards_display = True
+                        main_screen_display = False
+            
+            if ((mouseX >= 940 and mouseX <= 1020) and (mouseY >= 413 and mouseY <= 493)) and number_of_players > 4:
+                fill(35, 35, 35)
+                rect(290, 200, 80, 80, 6)
+                fill(0,0,0)
+                font3 = createFont("Courier", 17)
+                textFont(font3)
+                text("Kaarten", 331, 200+44)
+                kaarten4_button = True
+                if kaarten4_button == True:
+                    if ((mouseX >= 940 and mouseX <= 1020) and (mouseY >= 413 and mouseY <= 493)) and number_of_players > 4:
+                        player_card_list_g = player5_fieldcards + player5_trapcards 
+                        player_name_g = player5_name
+                        
+                        show_cards_display = True
+                        main_screen_display = False
+                        
+            if ((mouseX >= 940 and mouseX <= 1020) and (mouseY >= 646 and mouseY <= 726)) and number_of_players > 5:
+                fill(35, 35, 35)
+                rect(290, 200, 80, 80, 6)
+                fill(0,0,0)
+                font3 = createFont("Courier", 17)
+                textFont(font3)
+                text("Kaarten", 331, 200+44)
+                kaarten5_button = True
+                if kaarten5_button == True:
+                    if ((mouseX >= 940 and mouseX <= 1020) and (mouseY >= 646 and mouseY <= 726)) and number_of_players > 5:
+                        player_card_list_g = player6_fieldcards + player6_trapcards 
+                        player_name_g = player6_name
+                        
+                        show_cards_display = True
+                        main_screen_display = False
     
     elif show_cards_display == True:
         if (mouseX >= 1300 and mouseX <= 1440) and (mouseY >= 90 and mouseY <= 130):
-            main_screen_display = True
-            show_cards_display = False
+            fill(100, 100, 100)
+            rect(1300, 90, 140, 40, 6)
+            fill(0,0,0)
+            text("Terug", 1370, 122)
+            if (mouseX >= 1300 and mouseX <= 1440) and (mouseY >= 90 and mouseY <= 130):
+                main_screen_display = True
+                show_cards_display = False
             
         elif(mouseX >= 1100 and mouseX <= 1260) and (mouseY >= 220 and mouseY <= 260) and len(player_card_list_g) > 0:
             if player_card_list_g[0] in player1_fieldcards and player_name_g == player1_name:                
@@ -782,8 +1000,7 @@ def mousePressed():
             elif player_card_list_g[3] in player6_trapcards and player_name_g == player6_name:                
                 player6_trapcards.remove(player_card_list_g[3])
                 trapcard_list.append(player_card_list_g.pop(0))
-            
-              
+  
 
 def keyPressed():
     global player1_name, player2_name, player3_name, player4_name, player5_name, player6_name
