@@ -49,13 +49,13 @@ player_card_list_g = []
 player_name_g = ''
 
 player_names = []
-player_starting = 0
+player_starting = -1
 
 add_library("sound")
 frames = []
 side = -1
 side2 = -1
-number_of_dices = 1
+number_of_dices = 2
 
 player1millis = -3001
 player2millis = -3001
@@ -151,22 +151,22 @@ def draw():
     
     if millis() < player1millis + 1500: 
         cardLimitText()
-        text(str(player1_name) + " heeft al drie kaarten.", screenWidth/2, 850)
+        text(str(player1_name) + " heeft al drie kaarten.", screenWidth/2, screenHeight/2 + 10)
     if millis() < player2millis + 1500:  
         cardLimitText()
-        text(str(player2_name) + " heeft al drie kaarten.", screenWidth/2, 850)
+        text(str(player2_name) + " heeft al drie kaarten.", screenWidth/2, screenHeight/2 + 10)
     if millis() < player3millis + 1500:
         cardLimitText() 
-        text(str(player3_name) + " heeft al drie kaarten.", screenWidth/2, 850)
+        text(str(player3_name) + " heeft al drie kaarten.", screenWidth/2, screenHeight/2 + 10)
     if millis() < player4millis + 1500:
         cardLimitText() 
-        text(str(player4_name) + " heeft al drie kaarten.", screenWidth/2, 850)
+        text(str(player4_name) + " heeft al drie kaarten.", screenWidth/2, screenHeight/2 + 10)
     if millis() < player5millis + 1500:
         cardLimitText()
-        text(str(player5_name) + " heeft al drie kaarten.", screenWidth/2, 850)
+        text(str(player5_name) + " heeft al drie kaarten.", screenWidth/2, screenHeight/2 + 10)
     if millis() < player6millis + 1500:
         cardLimitText() 
-        text(str(player6_name) + " heeft al drie kaarten.", screenWidth/2, 850)
+        text(str(player6_name) + " heeft al drie kaarten.", screenWidth/2, screenHeight/2 + 10)
 
 #Asks the user how many players are playing the game at the moment and stores that in a variable.
 def how_many_players():
@@ -498,20 +498,6 @@ def show_cards():
         buttonY += 180
         textY += 180
         x += 1
-        
-        text("Aantal Kaarten = " + "0 / 3", screenWidth/2, 850)
-        if x == 1:
-            cardLimitText() 
-            text("Aantal Kaarten = " + str(x) + " / 3", screenWidth/2, 850)
-        elif x == 2:
-            cardLimitText() 
-            text("Aantal Kaarten = " + str(x) + " / 3", screenWidth/2, 850)
-        elif x == 3:
-            cardLimitText() 
-            text("Aantal Kaarten = " + str(x) + " / 3", screenWidth/2, 850)
-        else:
-            cardLimitText() 
-            text("Aantal Kaarten = " + str(x) + " / 3", screenWidth/2, 850)
 
 
 def show_manual():
@@ -529,14 +515,12 @@ def show_manual():
         
     
 
-def cardLimitText():
-    fill(148, 120, 214)
-    noStroke()
-    rect(450, 800, 600, 200)
-    fill(0) 
-    stroke(0)
-    textSize(30)
-    
+def cardLimitText():    
+    fill(155, 155, 155) 
+    rect(screenWidth/2 - 350, screenHeight/2 - 40, 700, 80, 6)
+    fill(0,0,0)
+    textAlign(CENTER)
+
 #Handles all the clicking of buttons in the program
 def mousePressed():
     global show_start_screen, number_of_players, how_many_players_screen, name_input_screen_display, main_screen_display
@@ -700,7 +684,7 @@ def mousePressed():
                     player4_box_selected = False
                     player5_box_selected = False
                     player6_box_selected = False
-                    player_starting = int(random(0,number_of_players-1))
+                    player_starting = int(random(0, number_of_players-1))
                         
             
     elif show_manual_display == True:
@@ -723,12 +707,9 @@ def mousePressed():
         if begin_ok_button == False:
             if (mouseX >= screenWidth/2 + 160 and mouseX <= screenWidth/2 + 220) and (mouseY >= screenHeight/2 - 20 and mouseY <= screenHeight/2 + 20):
                 begin_ok_button = True
-        else:
-            if (mouseX >= 100 and mouseX <= 180) and (mouseY >= 180 and mouseY <= 260):
-                if len(fieldcard_list) > 0:
-                    player1_fieldcards.append(generate_field_card())        
+        else:      
         #Handleiding Knop
-            elif (mouseX >= 1250 and mouseX < 1470) and (mouseY >=90 and mouseY <=130):
+            if (mouseX >= 1250 and mouseX < 1470) and (mouseY >=90 and mouseY <=130):
                 print("X : " + str(mouseX) + ", " + "Y: " + str(mouseY) + str(" IN SQUARE"))
                 show_manual_display = True
                 main_screen_display = False
@@ -1125,102 +1106,53 @@ def mousePressed():
         elif(mouseX >= 1100 and mouseX <= 1260) and (mouseY >= 580 and mouseY <= 620) and len(player_card_list_g) > 2:
             if player_card_list_g[2] in player1_fieldcards and player_name_g == player1_name:                
                 player1_fieldcards.remove(player_card_list_g[2])
-                fieldcard_list.append(player_card_list_g.pop(0))
+                fieldcard_list.append(player_card_list_g.pop(2))
                 player1_cardtotal -= 1
             elif player_card_list_g[2] in player1_trapcards and player_name_g == player1_name:                
                 player1_trapcards.remove(player_card_list_g[2])
-                trapcard_list.append(player_card_list_g.pop(0))     
+                trapcard_list.append(player_card_list_g.pop(pop(2)))     
                 player1_cardtotal -= 1       
             elif player_card_list_g[2] in player2_fieldcards and player_name_g == player2_name:                
                 player2_fieldcards.remove(player_card_list_g[2])
-                fieldcard_list.append(player_card_list_g.pop(0))
+                fieldcard_list.append(player_card_list_g.pop(2))
                 player2_cardtotal -= 1
             elif player_card_list_g[2] in player2_trapcards and player_name_g == player2_name:                
                 player2_trapcards.remove(player_card_list_g[2])
-                trapcard_list.append(player_card_list_g.pop(0))      
+                trapcard_list.append(player_card_list_g.pop(2))      
                 player2_cardtotal -= 1      
             elif player_card_list_g[2] in player3_fieldcards and player_name_g == player3_name:                
                 player3_fieldcards.remove(player_card_list_g[2])
-                fieldcard_list.append(player_card_list_g.pop(0))
+                fieldcard_list.append(player_card_list_g.pop(2))
                 player3_cardtotal -= 1
             elif player_card_list_g[2] in player3_trapcards and player_name_g == player3_name:                
                 player3_trapcards.remove(player_card_list_g[2])
-                trapcard_list.append(player_card_list_g.pop(0))        
+                trapcard_list.append(player_card_list_g.pop(2))        
                 player3_cardtotal -= 1    
             elif player_card_list_g[2] in player4_fieldcards and player_name_g == player4_name:                
                 player4_fieldcards.remove(player_card_list_g[2])
-                fieldcard_list.append(player_card_list_g.pop(0))
+                fieldcard_list.append(player_card_list_g.pop(2))
                 player4_cardtotal -= 1
             elif player_card_list_g[2] in player4_trapcards and player_name_g == player4_name:                
                 player4_trapcards.remove(player_card_list_g[2])
-                trapcard_list.append(player_card_list_g.pop(0))          
+                trapcard_list.append(player_card_list_g.pop(2))          
                 player4_cardtotal -= 1  
             elif player_card_list_g[2] in player5_fieldcards and player_name_g == player5_name:                
                 player5_fieldcards.remove(player_card_list_g[2])
-                fieldcard_list.append(player_card_list_g.pop(0))
+                fieldcard_list.append(player_card_list_g.pop(2))
                 player5_cardtotal -= 1
             elif player_card_list_g[2] in player5_trapcards and player_name_g == player5_name:                
                 player5_trapcards.remove(player_card_list_g[2])
-                trapcard_list.append(player_card_list_g.pop(0))       
+                trapcard_list.append(player_card_list_g.pop(2))       
                 player5_cardtotal -= 1     
             elif player_card_list_g[2] in player6_fieldcards and player_name_g == player6_name:                
                 player6_fieldcards.remove(player_card_list_g[2])
-                fieldcard_list.append(player_card_list_g.pop(0))
+                fieldcard_list.append(player_card_list_g.pop(2))
                 player6_cardtotal -= 1
             elif player_card_list_g[2] in player6_trapcards and player_name_g == player6_name:                
                 player6_trapcards.remove(player_card_list_g[2])
-                trapcard_list.append(player_card_list_g.pop(0))
+                trapcard_list.append(player_card_list_g.pop(2))
                 player6_cardtotal -= 1
             
-        elif(mouseX >= 1100 and mouseX <= 1260) and (mouseY >= 760 and mouseY <= 800) and len(player_card_list_g) > 3:
-            if player_card_list_g[3] in player1_fieldcards and player_name_g == player1_name:                
-                player1_fieldcards.remove(player_card_list_g[3])
-                fieldcard_list.append(player_card_list_g.pop(0))
-                player1_cardtotal -= 1
-            elif player_card_list_g[3] in player1_trapcards and player_name_g == player1_name:                
-                player1_trapcards.remove(player_card_list_g[3])
-                trapcard_list.append(player_card_list_g.pop(0))   
-                player1_cardtotal -= 1         
-            elif player_card_list_g[3] in player2_fieldcards and player_name_g == player2_name:                
-                player2_fieldcards.remove(player_card_list_g[3])
-                fieldcard_list.append(player_card_list_g.pop(0))
-                player2_cardtotal -= 1
-            elif player_card_list_g[3] in player2_trapcards and player_name_g == player2_name:                
-                player2_trapcards.remove(player_card_list_g[3])
-                trapcard_list.append(player_card_list_g.pop(0))    
-                player2_cardtotal -= 1        
-            elif player_card_list_g[3] in player3_fieldcards and player_name_g == player3_name:                
-                player3_fieldcards.remove(player_card_list_g[3])
-                fieldcard_list.append(player_card_list_g.pop(0))
-                player3_cardtotal -= 1
-            elif player_card_list_g[3] in player3_trapcards and player_name_g == player3_name:                
-                player3_trapcards.remove(player_card_list_g[3])
-                player3_cardtotal -= 1
-                trapcard_list.append(player_card_list_g.pop(0))            
-            elif player_card_list_g[3] in player4_fieldcards and player_name_g == player4_name:                
-                player4_fieldcards.remove(player_card_list_g[3])
-                fieldcard_list.append(player_card_list_g.pop(0))
-                player4_cardtotal -= 1
-            elif player_card_list_g[3] in player4_trapcards and player_name_g == player4_name:                
-                player4_trapcards.remove(player_card_list_g[3])
-                trapcard_list.append(player_card_list_g.pop(0))       
-                player4_cardtotal -= 1     
-            elif player_card_list_g[3] in player5_fieldcards and player_name_g == player5_name:                
-                player5_fieldcards.remove(player_card_list_g[3])
-                fieldcard_list.append(player_card_list_g.pop(0))
-                player5_cardtotal -= 1
-            elif player_card_list_g[3] in player5_trapcards and player_name_g == player5_name:                
-                player5_trapcards.remove(player_card_list_g[3])
-                trapcard_list.append(player_card_list_g.pop(0))      
-                player5_cardtotal -= 1      
-            elif player_card_list_g[3] in player6_fieldcards and player_name_g == player6_name:                
-                player6_fieldcards.remove(player_card_list_g[3])
-                fieldcard_list.append(player_card_list_g.pop(0))
-                player6_cardtotal -= 1
-            elif player_card_list_g[3] in player6_trapcards and player_name_g == player6_name:                
-                player6_trapcards.remove(player_card_list_g[3])
-                trapcard_list.append(player_card_list_g.pop(0))
-                player6_cardtotal -= 1
             
 
 def keyPressed():
